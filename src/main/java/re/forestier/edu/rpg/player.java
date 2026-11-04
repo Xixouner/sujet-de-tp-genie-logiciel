@@ -60,7 +60,7 @@ public class player {
         if (xp < levels.get(2)) {
             return 1;
         }
-        else if (xp < levels.get(3)) {return 2;
+        else if (xp < levels.get(3)) {return 2; //bug
         }
         if (xp < levels.get(4)) {
             return 3;
