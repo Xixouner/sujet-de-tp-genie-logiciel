@@ -4,6 +4,7 @@ import org.junit.jupiter.api.*;
 import re.forestier.edu.rpg.player;
 import re.forestier.edu.rpg.UpdatePlayer;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -167,4 +168,65 @@ public class UnitTests {
 
         assertThat(p.currenthealthpoints, is(72));
     }
+    @Test
+    @DisplayName("monnaie egale à 0")
+    void testRemoveMoneyZero(){
+        player p = new player("Florian","Grognak le barbare","ADVENTURER",100,new ArrayList<>());
+        p.removeMoney(100);
+        assertThat(p.money, is(0));
+    }
+    @Test
+    @DisplayName ("test de la fonction retrieveLevel() pour un joueur qui n'a pas encore gagné d'xp")
+    void testRetrieveLevelAtLevelBeforeTransition(){
+        player p = new player("Florian","Grognak le barbare","ADVENTURER",100,new ArrayList<>());
+        boolean isLevel1 = p.retrieveLevel() == 1;
+        assertThat(isLevel1, is(true));
+    }
+    @Test
+    @DisplayName ("test de la fonction retrieveLevel() pour un joueur passant pile au niveau 1")
+    void testRetrieveLevelAtLevelTransition1to2(){
+        player p = new player("Florian","Grognak le barbare","ADVENTURER",100,new ArrayList<>());
+        UpdatePlayer.addXp(p, 10);
+        boolean isLevel1 = p.retrieveLevel() == 1;
+        assertThat(isLevel1, is(false));
+    }
+    @Test
+    @DisplayName ("test de la fonction retrieveLevel() pour un joueur passant pile au niveau 2")
+    void testRetrieveLevelAtLevelTransition2to3(){
+        player p = new player("Florian","Grognak le barbare","ADVENTURER",100,new ArrayList<>());
+        UpdatePlayer.addXp(p, 27);
+        boolean isLevel2 = p.retrieveLevel() == 2;
+        assertThat(isLevel2, is(false));
+    }
+    @Test
+    @DisplayName ("test de la fonction retrieveLevel() pour un joueur passant pile au niveau 3")
+    void testRetrieveLevelAtLevelTransition3to4(){
+        player p = new player("Florian","Grognak le barbare","ADVENTURER",100,new ArrayList<>());
+        UpdatePlayer.addXp(p, 57);
+        boolean isLevel3 = p.retrieveLevel() == 3;
+        assertThat(isLevel3, is(false));
+    }
+    @Test
+    @DisplayName ("test de la fonction retrieveLevel() pour un joueur passant pile au niveau 4")
+    void testRetrieveLevelAtLevelTransition4to5(){
+        player p = new player("Florian","Grognak le barbare","ADVENTURER",100,new ArrayList<>());
+        UpdatePlayer.addXp(p, 111);
+        boolean isLevel4 = p.retrieveLevel() == 4;
+        assertThat(isLevel4, is(false));
+    }
+    @Test
+    @DisplayName("newlevel different de currentlevel dans addxp")
+    void testAddXpLevelChange(){
+        player p = new player("Florian","Grognak le barbare","ADVENTURER",100,new ArrayList<>());
+        boolean changelevel =UpdatePlayer.addXp(p, 11);
+        assertThat(changelevel, is(true));
+    }
+    @Test
+    @DisplayName ("newlevel equal to currentlevel dans addxp")
+    void testAddXpNoLevelChange(){
+        player p = new player("Florian","Grognak le barbare","ADVENTURER",100,new ArrayList<>());
+        boolean changelevel =UpdatePlayer.addXp(p, 5);
+        assertThat(changelevel, is(false));
+    }
+
 }

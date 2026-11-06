@@ -24,6 +24,15 @@ dependencies {
 
 test {
     useJUnitPlatform()
+    finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+    reports {
+        xml.required = true
+        xml.outputLocation = layout.buildDirectory.dir('jacoco/jacoco.xml').get().asFile
+    }
+    dependsOn test
 }
 
 pitest {
