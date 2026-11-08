@@ -7,6 +7,10 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.fail;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
+
 
 import java.util.ArrayList;
 
@@ -228,5 +232,83 @@ public class UnitTests {
         boolean changelevel =UpdatePlayer.addXp(p, 5);
         assertThat(changelevel, is(false));
     }
+    @Test
+    @DisplayName ("test dans addxp quand on passe à un niveau superieur ajout dans l'inventaire")
+    void testAddXpLevelChangeInventory(){
+        player p = new player("Florian","Grognak le barbare","ADVENTURER",100,new ArrayList<>());
+        ArrayList<String> inventoryBefore = new ArrayList<>(p.inventory);
+        UpdatePlayer.addXp(p, 11);
+        ArrayList<String> inventoryAfter = new ArrayList<>(p.inventory);
+        assertThat(inventoryAfter, is(not(inventoryBefore)));
+    }
+    //TODO : ajouter un test pour vérifier que l'affichage du joueur ko est correct
+    @Test
+    @DisplayName ("test l'affichage si le joueur est mort")
+    void testDisplayPlayerDead() {
+        player p = new player("Florian","Grognak le barbare","ADVENTURER",100,new ArrayList<>());
+        p.currenthealthpoints = 0;
+        PrintStream originalOut = System.out;
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        try {
+            System.setOut(new PrintStream(output));
+            UpdatePlayer.majFinDeTour(p);
+        } finally {
+            System.setOut(originalOut);
+        }
 
+        assertThat(output.toString(), containsString("Le joueur est KO !"));
+    }
+    @Test
+    @DisplayName ("test de l'ajout d'un item quand on ajoute de l'xp")
+    void testAddItemWhenAddingXp(){
+        player p = new player("Florian","Grognak le barbare","ADVENTURER",100,new ArrayList<>());
+        UpdatePlayer.addXp(p, 11);
+        assertThat(p.inventory, hasSize(1));
+    }
+    @Test
+    @DisplayName ("test de l'ajout des capacités quand on ajoute de l'xp")
+    void testAddAbilitiesWhenAddingXp(){
+        player p = new player("Florian","Grognak le barbare","DWARF",100,new ArrayList<>());
+        UpdatePlayer.addXp(p, 11);
+        assertThat(p.abilities.get("DEF"), is(1));
+        assertThat(p.abilities.get("ALC"), is(5));
+    }
+    @Test
+    @DisplayName("test maj fin de tour avec un nain à moitié de vie exactement")
+    void testMajFinDeTourDwarfHalfLife() {
+        player p = new player("Florian","Grognak le barbare","DWARF",100,new ArrayList<>());
+        p.currenthealthpoints = 75;
+        p.healthpoints = 150;
+        UpdatePlayer.majFinDeTour(p);
+        assertThat(p.currenthealthpoints, is(75));
+        p.currenthealthpoints = 74;
+        p.inventory.add("Holy Elixir");
+        UpdatePlayer.majFinDeTour(p);
+        assertThat(p.currenthealthpoints, is(76));
+    }
+    @Test
+    @DisplayName("test maj fin de tour avec un archer à moitié de vie exactement")
+    void testMajFinDeTourArcherHalfLife() {
+        player p = new player("Florian","Grognak le barbare","ARCHER",100,new ArrayList<>());
+        p.currenthealthpoints = 75;
+        p.healthpoints = 150;
+        UpdatePlayer.majFinDeTour(p);
+        assertThat(p.currenthealthpoints, is(75));
+        p.currenthealthpoints = 74;
+        UpdatePlayer.majFinDeTour(p);
+        assertThat(p.currenthealthpoints, is(75));
+        p.currenthealthpoints = 74;
+        p.inventory.add("Magic Bow");
+        UpdatePlayer.majFinDeTour(p);
+        assertThat(p.currenthealthpoints, is(83));
+    }
+    @Test
+    @DisplayName("test maj fin de tour avec un aventurier de niveau 1")
+    void testMajFinDeTourAdventurerLevel1() {
+        player p = new player("Florian","Grognak le barbare","ADVENTURER",100,new ArrayList<>());
+        p.currenthealthpoints = 40;
+        p.healthpoints = 100;
+        UpdatePlayer.majFinDeTour(p);
+        assertThat(p.currenthealthpoints, is(41));
+    }
 }
