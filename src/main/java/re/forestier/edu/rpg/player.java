@@ -8,7 +8,7 @@ public class player {
     public String Avatar_name;
     private String AvatarClass;
 
-    public Integer money;
+    public int money;
 
     public int healthpoints;
     public int currenthealthpoints;
@@ -25,7 +25,7 @@ public class player {
         this.playerName = playerName;
         Avatar_name = avatar_name;
         AvatarClass = avatarClass;
-        this.money = Integer.valueOf(money);
+        this.money = money;
         this.inventory = inventory;
         this.abilities = UpdatePlayer.abilitiesPerTypeAndLevel().get(AvatarClass).get(1);
     }
