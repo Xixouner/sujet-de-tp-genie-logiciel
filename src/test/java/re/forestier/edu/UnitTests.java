@@ -2,6 +2,7 @@ package re.forestier.edu;
 
 import org.junit.jupiter.api.*;
 import re.forestier.edu.rpg.player;
+import re.forestier.edu.rpg.player.AvatarClassAvailable;
 import re.forestier.edu.rpg.UpdatePlayer;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -70,11 +71,11 @@ public class UnitTests {
     @DisplayName("tester les classes")
     void testClass() {
         player p = new player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>());
-        assertThat(p.getAvatarClass(), is("ADVENTURER"));
+        assertThat(p.getAvatarClass(), is(AvatarClassAvailable.ADVENTURER));
         player p2 = new player("Florian", "Grognak le barbare", "ARCHER", 100, new ArrayList<>());
-        assertThat(p2.getAvatarClass(), is("ARCHER"));
+        assertThat(p2.getAvatarClass(), is(AvatarClassAvailable.ARCHER));
         player p3 = new player("Florian", "Grognak le barbare", "DWARF", 100, new ArrayList<>());
-        assertThat(p3.getAvatarClass(), is("DWARF"));
+        assertThat(p3.getAvatarClass(), is(AvatarClassAvailable.DWARF));
     }
 
     @Test

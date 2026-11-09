@@ -4,9 +4,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class player {
+  public enum AvatarClassAvailable {
+      ARCHER,
+      ADVENTURER,
+      DWARF
+  }
     public String playerName;
     public String Avatar_name;
-    private String AvatarClass;
+    private  AvatarClassAvailable AvatarClass;
 
     public int money;
 
@@ -18,19 +23,25 @@ public class player {
     public HashMap<String, Integer> abilities;
     public ArrayList<String> inventory;
     public player(String playerName, String avatar_name, String avatarClass, int money, ArrayList<String> inventory) {
-        if (!avatarClass.equals("ARCHER") && !avatarClass.equals("ADVENTURER") && !avatarClass.equals("DWARF") ) {
-            return;
-        }
-
+      AvatarClassAvailable avatar;
+      if (avatarClass == null) {
+        return;
+      }
+      try{
+        avatar = AvatarClassAvailable.valueOf(avatarClass);
+      }
+      catch(IllegalArgumentException e) {
+        return;
+      }
         this.playerName = playerName;
         Avatar_name = avatar_name;
-        AvatarClass = avatarClass;
+        AvatarClass = avatar;
         this.money = money;
         this.inventory = inventory;
         this.abilities = UpdatePlayer.abilitiesPerTypeAndLevel().get(AvatarClass).get(1);
     }
 
-    public String getAvatarClass () {
+    public AvatarClassAvailable getAvatarClass () {
         return AvatarClass;
     }
     public void changeMoney(int amount){
