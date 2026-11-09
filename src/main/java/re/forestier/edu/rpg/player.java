@@ -33,17 +33,11 @@ public class player {
     public String getAvatarClass () {
         return AvatarClass;
     }
-
-    public void removeMoney(int amount) throws IllegalArgumentException {
-        if (money - amount < 0) {
-            throw new IllegalArgumentException("Player can't have a negative money!");
-        }
-
-        money = Integer.parseInt(money.toString()) - amount;
-    }
-    public void addMoney(int amount) {
-        var value = Integer.valueOf(amount);
-        money = money + (value != null ? value : 0);
+    public void changeMoney(int amount){
+      if(money + amount < 0){
+        throw new IllegalArgumentException("Player can't have a negative money!");
+      }
+      money += amount;
     }
     // (lvl-1) * 10 + round((lvl * xplvl-1)/4)
     public int retrieveLevel() {

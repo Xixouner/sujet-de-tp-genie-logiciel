@@ -28,26 +28,19 @@ public class UnitTests {
         player p = new player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>());
 
         try {
-            p.removeMoney(200);
+            p.changeMoney(-200);
         } catch (IllegalArgumentException e) {
             return;
         }
         fail();
     }
     @Test
-    @DisplayName("peut-on correctement enlever la monnaie")
-    void testRemoveMoney(){
-        player p = new player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>());
-        p.removeMoney(20);
-        assertThat(p.money,is(80));
-    }
-    @Test
     @DisplayName("ajouter de l'argent")
-    void testAddMoney(){
+    void testchangeMoney(){
         player p = new player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>());
-        p.addMoney(20);
+        p.changeMoney(20);
         assertThat(p.money,is(120));
-        p.addMoney(-20);
+        p.changeMoney(-20);
         assertThat(p.money,is(100));
     }
     @Test
@@ -173,9 +166,9 @@ public class UnitTests {
     }
     @Test
     @DisplayName("monnaie egale à 0")
-    void testRemoveMoneyZero(){
+    void testchangeMoneyZero(){
         player p = new player("Florian","Grognak le barbare","ADVENTURER",100,new ArrayList<>());
-        p.removeMoney(100);
+        p.changeMoney(-100);
         assertThat(p.money, is(0));
     }
     @Test
