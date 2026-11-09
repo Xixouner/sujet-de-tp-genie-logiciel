@@ -134,11 +134,7 @@ public class UpdatePlayer {
                         player.currenthealthpoints+=1;
                     }
                     player.currenthealthpoints+=1;
-                } else if(player.getAvatarClass().equals("ADVENTURER")) {
-                    player.currenthealthpoints+=2;
                 }
-
-
                 if(player.getAvatarClass().equals("ARCHER")) {
                     player.currenthealthpoints+=1;
                     if(player.inventory.contains("Magic Bow")) {
