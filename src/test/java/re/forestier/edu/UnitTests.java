@@ -99,7 +99,6 @@ public class UnitTests {
         player p3 = new player("Florian", "Grognak le barbare", "DWARF", 100, new ArrayList<>());
         assertThat(p3.getAvatarClass(), is(AvatarClassAvailable.DWARF));
     }
-    //TODO : ajouter un test pour vérifier que l'affichage du joueur ko est correct
     @Test
     @DisplayName ("test l'affichage si le joueur est mort")
     void testDisplayPlayerDead() {
@@ -487,5 +486,54 @@ public class UnitTests {
         assertThat(p.abilities.get("CHA"), is(3));
         assertThat(p.abilities.get("ATK"), is(5));
         assertThat(p.abilities.get("ALC"), is(1));
+    }
+    @Test
+    @DisplayName("Gobelin level 1 abilities")
+    void testGoblinLevel1Abilities() {
+        player p = new player("Florian","Grognak le barbare","GOBLIN",100,new ArrayList<>());
+        assertThat(p.abilities.get("ATK"), is(2));
+        assertThat(p.abilities.get("INT"), is(2));
+        assertThat(p.abilities.get("ALC"), is(1));
+    }
+    @Test
+    @DisplayName("Gobelin level 2 abilities")
+    void testGoblinLevel2Abilities() {
+        player p = new player("Florian","Grognak le barbare","GOBLIN",100,new ArrayList<>());
+        UpdatePlayer.addXp(p, 11);
+        assertThat(p.abilities.get("ATK"), is(3));
+        assertThat(p.abilities.get("INT"), is(2));
+        assertThat(p.abilities.get("ALC"), is(4));
+    }
+    @Test
+    @DisplayName("Gobelin level 3 abilities")
+    void testGoblinLevel3Abilities() {
+        player p = new player("Florian","Grognak le barbare","GOBLIN",100,new ArrayList<>());
+        UpdatePlayer.addXp(p, 27);
+        assertThat(p.abilities.get("ATK"), is(3));
+        assertThat(p.abilities.get("INT"), is(2));
+        assertThat(p.abilities.get("ALC"), is(4));
+        assertThat(p.abilities.get("VIS"), is(1));
+    }
+    @Test
+    @DisplayName("Gobelin level 4 abilities")
+    void testGoblinLevel4Abilities() {
+        player p = new player("Florian","Grognak le barbare","GOBLIN",100,new ArrayList<>());
+        UpdatePlayer.addXp(p, 57);
+        assertThat(p.abilities.get("ATK"), is(3));
+        assertThat(p.abilities.get("INT"), is(2));
+        assertThat(p.abilities.get("ALC"), is(4));
+        assertThat(p.abilities.get("VIS"), is(1));
+        assertThat(p.abilities.get("DEF"), is(1));
+    }
+    @Test
+    @DisplayName("Gobelin level 5 abilities")
+    void testGoblinLevel5Abilities() {
+        player p = new player("Florian","Grognak le barbare","GOBLIN",100,new ArrayList<>());
+        UpdatePlayer.addXp(p, 111);
+        assertThat(p.abilities.get("ATK"), is(4));
+        assertThat(p.abilities.get("INT"), is(2));
+        assertThat(p.abilities.get("ALC"), is(4));
+        assertThat(p.abilities.get("VIS"), is(1));
+        assertThat(p.abilities.get("DEF"), is(2));
     }
 }
