@@ -6,7 +6,6 @@ import re.forestier.edu.rpg.player.AvatarClassAvailable;
 import re.forestier.edu.rpg.UpdatePlayer;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.fail;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -477,5 +476,16 @@ public class UnitTests {
         assertThat(p.abilities.get("ALC"), is(5));
         assertThat(p.abilities.get("DEF"), is(2));
         assertThat(p.abilities.get("CHA"), is(1));
+    }
+    @Test
+    @DisplayName("Passer plusieurs niveaux d'un coup et vérifier que les abilités sont correctes")
+    void testMultipleLevelUpAbilities() {
+        player p = new player("Florian","Grognak le barbare","ADVENTURER",100,new ArrayList<>());
+        UpdatePlayer.addXp(p, 100); // devrait passer du niveau 1 au niveau 4
+        assertThat(p.abilities.get("DEF"), is(3));
+        assertThat(p.abilities.get("INT"), is(2));
+        assertThat(p.abilities.get("CHA"), is(3));
+        assertThat(p.abilities.get("ATK"), is(5));
+        assertThat(p.abilities.get("ALC"), is(1));
     }
 }

@@ -143,7 +143,7 @@ public class UpdatePlayer {
         int currentLevel = player.retrieveLevel();
         player.xp += xp;
         int newLevel = player.retrieveLevel();
-
+        // TODO: gérer le cas ou le joueur augmente de plusieurs niveaux à la fois (donc il faut lui donner plusieurs objets et plusieurs abilités)
         if (newLevel != currentLevel) {
             // Player leveled-up!
             // Give a random object
