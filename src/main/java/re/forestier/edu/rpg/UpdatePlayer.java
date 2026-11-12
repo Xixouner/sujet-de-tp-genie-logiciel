@@ -144,17 +144,11 @@ public class UpdatePlayer {
         player.xp += xp;
         int newLevel = player.retrieveLevel();
         boolean leveledUp = false;
-        // TODO: gérer le cas ou le joueur augmente de plusieurs niveaux à la fois (donc il faut lui donner plusieurs objets et plusieurs abilités)
         while (newLevel > currentLevel) {
             leveledUp = true;
-            // Player leveled-up!
-            // Give a random object
-            ;
             currentLevel++;
             Random random = new Random();
             player.inventory.add(objectList[random.nextInt(objectList.length)]);
-
-            // Add/upgrade abilities to player
             HashMap<String, Integer> abilities = abilitiesPerTypeAndLevel().get(player.getAvatarClass()).get(currentLevel);
             abilities.forEach((ability, level) -> {
                 player.abilities.put(ability, abilities.get(ability));
