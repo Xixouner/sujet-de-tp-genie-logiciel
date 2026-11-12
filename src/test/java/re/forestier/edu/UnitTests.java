@@ -536,4 +536,85 @@ public class UnitTests {
         assertThat(p.abilities.get("VIS"), is(1));
         assertThat(p.abilities.get("DEF"), is(2));
     }
+    @Test
+    @DisplayName("Test la classe objet avec des valeurs valides (fourre tout de tests)")
+    void testValidObjectClass() {
+        ObjectClass obj = new ObjectClass("Lookout Ring", "Prevents surprise attacks", 50, 100);
+        assertThat(obj.getName(), is("Lookout Ring"));
+        assertThat(obj.getDescription(), is("Prevents surprise attacks"));
+        assertThat(obj.getWeight(), is(50));
+        assertThat(obj.getValue(), is(100));
+        player p = new player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>());
+        p.inventory.add(obj.getName());
+        assertThat(p.inventory, hasItem("Lookout Ring"));
+        assertThat(p.inventory.size(), is(1));
+        assertThat(p.inventory.get(0), is("Lookout Ring"));
+        p.sell(obj.getName());
+        assertThat(p.inventory.size(), is(0));
+        assertThat(p.money, is(200));
+    }
+    @Test
+    @DisplayName("Test la classe objet avec le nom invalide")
+    void testInvalidObjectClassName() {
+        try {
+            ObjectClass obj = new ObjectClass("", "Prevents surprise attacks", 50, 100);
+            fail("Expected IllegalArgumentException for empty name");
+        } catch (IllegalArgumentException e) {
+            assertThat(e.getMessage(), is("Name cannot be null or empty"));
+        }
+    }
+    @Test
+    @DisplayName("Test la classe objet avec le poids invalide")
+    void testInvalidObjectClassWeight() {
+        try {
+            ObjectClass obj = new ObjectClass("Lookout Ring", "Prevents surprise attacks", -10, 100);
+            fail("Expected IllegalArgumentException for negative weight");
+        } catch (IllegalArgumentException e) {
+            assertThat(e.getMessage(), is("Weight cannot be negative"));
+        }
+    }
+    @Test
+    @DisplayName("Test la classe objet avec la valeur invalide")
+    void testInvalidObjectClassValue() {
+        try {
+            ObjectClass obj = new ObjectClass("Lookout Ring", "Prevents surprise attacks", 50, -100);
+            fail("Expected IllegalArgumentException for negative value");
+        } catch (IllegalArgumentException e) {
+            assertThat(e.getMessage(), is("Value cannot be negative"));
+        }
+    }
+    @Test
+    @DisplayName("Test la classe objet avec la description invalide")
+    void testInvalidObjectClassDescription() {
+        try {
+            ObjectClass obj = new ObjectClass("Lookout Ring", "", 50, 100);
+            fail("Expected IllegalArgumentException for empty description");
+        } catch (IllegalArgumentException e) {
+            assertThat(e.getMessage(), is("Description cannot be null or empty"));
+        }
+    }
+    @Test
+    @DisplayName("Test de la vente d'un objet qui n'est pas dans l'inventaire")
+    void testSellObjectNotInInventory() {
+        player p = new player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>());
+        p.inventory.add("Lookout Ring");
+        try {
+            p.sell("Magic Bow");
+            fail("Expected IllegalArgumentException for selling an item not in inventory");
+        } catch (IllegalArgumentException e) {
+            assertThat(e.getMessage(), is("Item not found in inventory"));
+        }
+        assertThat(p.inventory.size(), is(1));
+        assertThat(p.inventory, hasItem("Lookout Ring"));
+    }
+    @Test
+    @DisplayName("Test de la vente d'un objet valeur correcte et inventaire mis à jour")
+    void testSellObjectUpdatesInventoryAndMoney() {
+        player p = new player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>());
+        ObjectClass obj = new ObjectClass("Lookout Ring", "Prevents surprise attacks", 50, 100);
+        p.inventory.add(obj.getName());
+        p.sell(obj.getName());
+        assertThat(p.inventory.size(), is(0));
+        assertThat(p.money, is(200));
+    }
 }
