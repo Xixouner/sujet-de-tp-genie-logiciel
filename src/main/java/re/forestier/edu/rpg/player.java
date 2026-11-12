@@ -34,8 +34,8 @@ public class player {
         return;
       }
         this.playerName = playerName;
-        Avatar_name = avatar_name;
-        AvatarClass = avatar;
+        this.Avatar_name = avatar_name;
+        this.AvatarClass = avatar;
         this.money = money;
         this.inventory = inventory;
         this.abilities = UpdatePlayer.abilitiesPerTypeAndLevel().get(AvatarClass).get(1);
