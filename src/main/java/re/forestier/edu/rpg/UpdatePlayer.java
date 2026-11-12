@@ -68,7 +68,7 @@ public class UpdatePlayer {
     }
     private static HashMap<String, Integer> archerLevel3() {
         HashMap<String, Integer> archerLevel3 = new HashMap<>();
-        archerLevel3.put("ATK", 3);
+        archerLevel3.put("ATK", 3);// ne sert à rien, mais c'est pour montrer que l'archer est plus fort que les autres classes
         return archerLevel3;
     }
     private static HashMap<String, Integer> archerLevel4() {

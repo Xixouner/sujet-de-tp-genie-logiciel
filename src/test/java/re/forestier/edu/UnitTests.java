@@ -6,6 +6,7 @@ import re.forestier.edu.rpg.player.AvatarClassAvailable;
 import re.forestier.edu.rpg.UpdatePlayer;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.fail;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -303,5 +304,178 @@ public class UnitTests {
         UpdatePlayer.addXp(p, 111);
         boolean isLevel4 = p.retrieveLevel() == 4;
         assertThat(isLevel4, is(false));
+    }
+    @Test
+    @DisplayName ("test d'aventurier level 1 et les abilités qu'il a au départ")
+    void testAdventurerLevel1Abilities() {
+        player p = new player("Florian","Grognak le barbare","ADVENTURER",100,new ArrayList<>());
+        assertThat(p.abilities.get("ATK"), is(3));
+        assertThat(p.abilities.get("DEF"), is(1));
+        assertThat(p.abilities.get("INT"), is(1));
+        assertThat(p.abilities.get("CHA"), is(2));
+    }
+    @Test
+    @DisplayName ("test d'aventurier level 2 et les abilités qu'il a après avoir gagné de l'xp")
+    void testAdventurerLevel2Abilities() {
+        player p = new player("Florian","Grognak le barbare","ADVENTURER",100,new ArrayList<>());
+        UpdatePlayer.addXp(p, 11);
+        assertThat(p.abilities.get("ATK"), is(3));
+        assertThat(p.abilities.get("DEF"), is(1));
+        assertThat(p.abilities.get("INT"), is(2));
+        assertThat(p.abilities.get("CHA"), is(3));
+    }
+    @Test
+    @DisplayName ("test d'aventurier level 3 et les abilités qu'il a après avoir gagné de l'xp")
+    void testAdventurerLevel3Abilities() {
+        player p = new player("Florian","Grognak le barbare","ADVENTURER",100,new ArrayList<>());
+        UpdatePlayer.addXp(p, 10);
+        UpdatePlayer.addXp(p, 17);
+        assertThat(p.abilities.get("DEF"), is(1));
+        assertThat(p.abilities.get("INT"), is(2));
+        assertThat(p.abilities.get("CHA"), is(3));
+        assertThat(p.abilities.get("ATK"), is(5));
+        assertThat(p.abilities.get("ALC"), is(1));
+    }
+     @Test
+    @DisplayName ("test d'aventurier level 4 et les abilités qu'il a après avoir gagné de l'xp")
+    void testAdventurerLevel4Abilities() {
+        player p = new player("Florian","Grognak le barbare","ADVENTURER",100,new ArrayList<>());
+        UpdatePlayer.addXp(p, 10);
+        UpdatePlayer.addXp(p, 17);
+        UpdatePlayer.addXp(p, 30);
+        assertThat(p.abilities.get("DEF"), is(3));
+        assertThat(p.abilities.get("INT"), is(2));
+        assertThat(p.abilities.get("CHA"), is(3));
+        assertThat(p.abilities.get("ATK"), is(5));
+        assertThat(p.abilities.get("ALC"), is(1));
+    }
+    @Test
+    @DisplayName ("test d'aventurier level 5 et les abilités qu'il a après avoir gagné de l'xp")
+    void testAdventurerLevel5Abilities() {
+        player p = new player("Florian","Grognak le barbare","ADVENTURER",100,new ArrayList<>());
+        UpdatePlayer.addXp(p, 10);
+        UpdatePlayer.addXp(p, 17);
+        UpdatePlayer.addXp(p, 30);
+        UpdatePlayer.addXp(p, 54);
+        assertThat(p.abilities.get("DEF"), is(4));
+        assertThat(p.abilities.get("INT"), is(2));
+        assertThat(p.abilities.get("CHA"), is(3));
+        assertThat(p.abilities.get("ATK"), is(5));
+        assertThat(p.abilities.get("ALC"), is(1));
+        assertThat(p.abilities.get("VIS"), is(1));
+    }
+    @Test
+    @DisplayName ("test d'archer level 1 et les abilités qu'il a au départ")
+    void testArcherLevel1Abilities() {
+        player p = new player("Florian","Grognak le barbare","ARCHER",100,new ArrayList<>());
+        assertThat(p.abilities.get("ATK"), is(3));
+        assertThat(p.abilities.get("INT"), is(1));
+        assertThat(p.abilities.get("CHA"), is(1));
+        assertThat(p.abilities.get("VIS"), is(3));
+    }
+    @Test
+    @DisplayName ("test d'archer level 2 et les abilités qu'il a après avoir gagné de l'xp")
+    void testArcherLevel2Abilities() {
+        player p = new player("Florian","Grognak le barbare","ARCHER",100,new ArrayList<>());
+        UpdatePlayer.addXp(p, 11);
+        assertThat(p.abilities.get("ATK"), is(3));
+        assertThat(p.abilities.get("INT"), is(1));
+        assertThat(p.abilities.get("CHA"), is(2));
+        assertThat(p.abilities.get("VIS"), is(3));
+        assertThat(p.abilities.get("DEF"), is(1));
+    }
+    @Test
+    @DisplayName ("test d'archer level 3 et les abilités qu'il a après avoir gagné de l'xp")
+    void testArcherLevel3Abilities() {
+        player p = new player("Florian","Grognak le barbare","ARCHER",100,new ArrayList<>());
+        UpdatePlayer.addXp(p, 10);
+        UpdatePlayer.addXp(p, 17);
+        assertThat(p.abilities.get("ATK"), is(3));
+        assertThat(p.abilities.get("INT"), is(1));
+        assertThat(p.abilities.get("CHA"), is(2));
+        assertThat(p.abilities.get("VIS"), is(3));
+        assertThat(p.abilities.get("DEF"), is(1));
+    }
+    @Test
+    @DisplayName ("test d'archer level 4 et les abilités qu'il a après avoir gagné de l'xp")
+    void testArcherLevel4Abilities() {
+        player p = new player("Florian","Grognak le barbare","ARCHER",100,new ArrayList<>());
+        UpdatePlayer.addXp(p, 10);
+        UpdatePlayer.addXp(p, 17);
+        UpdatePlayer.addXp(p, 30);
+        assertThat(p.abilities.get("ATK"), is(3));
+        assertThat(p.abilities.get("INT"), is(1));
+        assertThat(p.abilities.get("CHA"), is(2));
+        assertThat(p.abilities.get("VIS"), is(3));
+        assertThat(p.abilities.get("DEF"), is(2));
+    }
+    @Test
+    @DisplayName ("test d'archer level 5 et les abilités qu'il a après avoir gagné de l'xp")
+    void testArcherLevel5Abilities() {
+        player p = new player("Florian","Grognak le barbare","ARCHER",100,new ArrayList<>());
+        UpdatePlayer.addXp(p, 10);
+        UpdatePlayer.addXp(p, 17);
+        UpdatePlayer.addXp(p, 30);
+        UpdatePlayer.addXp(p, 54);
+        assertThat(p.abilities.get("ATK"), is(4));
+        assertThat(p.abilities.get("INT"), is(1));
+        assertThat(p.abilities.get("CHA"), is(2));
+        assertThat(p.abilities.get("VIS"), is(3));
+        assertThat(p.abilities.get("DEF"), is(2));
+    }
+    @Test
+    @DisplayName ("test de nain level 1 et les abilités qu'il a au départ")
+    void testDwarfLevel1Abilities() {
+        player p = new player("Florian","Grognak le barbare","DWARF",100,new ArrayList<>());
+        assertThat(p.abilities.get("ATK"), is(3));
+        assertThat(p.abilities.get("INT"), is(1));
+        assertThat(p.abilities.get("ALC"), is(4));
+    }
+    @Test
+    @DisplayName ("test de nain level 2 et les abilités qu'il a après avoir gagné de l'xp")
+    void testDwarfLevel2Abilities() {
+        player p = new player("Florian","Grognak le barbare","DWARF",100,new ArrayList<>());
+        UpdatePlayer.addXp(p, 11);
+        assertThat(p.abilities.get("ATK"), is(3));
+        assertThat(p.abilities.get("INT"), is(1));
+        assertThat(p.abilities.get("ALC"), is(5));
+        assertThat(p.abilities.get("DEF"), is(1));
+    }
+    @Test
+    @DisplayName ("test de nain level 3 et les abilités qu'il a après avoir gagné de l'xp")
+    void testDwarfLevel3Abilities() {
+        player p = new player("Florian","Grognak le barbare","DWARF",100,new ArrayList<>());
+        UpdatePlayer.addXp(p, 10);
+        UpdatePlayer.addXp(p, 17);
+        assertThat(p.abilities.get("ATK"), is(4));
+        assertThat(p.abilities.get("INT"), is(1));
+        assertThat(p.abilities.get("ALC"), is(5));
+        assertThat(p.abilities.get("DEF"), is(1));
+    }
+    @Test
+    @DisplayName ("test de nain level 4 et les abilités qu'il a après avoir gagné de l'xp")
+    void testDwarfLevel4Abilities() {
+        player p = new player("Florian","Grognak le barbare","DWARF",100,new ArrayList<>());
+        UpdatePlayer.addXp(p, 10);
+        UpdatePlayer.addXp(p, 17);
+        UpdatePlayer.addXp(p, 30);
+        assertThat(p.abilities.get("ATK"), is(4));
+        assertThat(p.abilities.get("INT"), is(1));
+        assertThat(p.abilities.get("ALC"), is(5));
+        assertThat(p.abilities.get("DEF"), is(2));
+    }
+    @Test
+    @DisplayName ("test de nain level 5 et les abilités qu'il a après avoir gagné de l'xp")
+    void testDwarfLevel5Abilities() {
+        player p = new player("Florian","Grognak le barbare","DWARF",100,new ArrayList<>());
+        UpdatePlayer.addXp(p, 10);
+        UpdatePlayer.addXp(p, 17);
+        UpdatePlayer.addXp(p, 30);
+        UpdatePlayer.addXp(p, 54);
+        assertThat(p.abilities.get("ATK"), is(4));
+        assertThat(p.abilities.get("INT"), is(1));
+        assertThat(p.abilities.get("ALC"), is(5));
+        assertThat(p.abilities.get("DEF"), is(2));
+        assertThat(p.abilities.get("CHA"), is(1));
     }
 }
