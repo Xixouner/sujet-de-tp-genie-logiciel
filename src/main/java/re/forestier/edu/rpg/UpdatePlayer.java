@@ -17,6 +17,7 @@ public class UpdatePlayer {
         abilitiesPerTypeAndLevel.put(AvatarClassAvailable.ADVENTURER, adventurerLevels());
         abilitiesPerTypeAndLevel.put(AvatarClassAvailable.ARCHER, archerLevels());
         abilitiesPerTypeAndLevel.put(AvatarClassAvailable.DWARF, dwarfLevels());
+        abilitiesPerTypeAndLevel.put(AvatarClassAvailable.GOBLIN, goblinLevels());
 
         return abilitiesPerTypeAndLevel;
     }
@@ -111,6 +112,37 @@ public class UpdatePlayer {
         return dwarfLevel5;
     }
 
+    private static HashMap<String,Integer> goblinLevel1() {
+        HashMap<String, Integer> goblinLevel1 = new HashMap<>();
+        goblinLevel1.put("INT", 2);
+        goblinLevel1.put("ATK", 2);
+        goblinLevel1.put("ALC", 1);
+        return goblinLevel1;
+    }
+    private static HashMap<String,Integer> goblinLevel2() {
+        HashMap<String, Integer> goblinLevel2 = new HashMap<>();
+        goblinLevel2.put("ATK", 3);
+        goblinLevel2.put("ALC", 4);
+        return goblinLevel2;
+    }
+    private static HashMap<String,Integer> goblinLevel3() {
+        HashMap<String, Integer> goblinLevel3 = new HashMap<>();
+        goblinLevel3.put("VIS", 1);
+        return goblinLevel3;
+    }
+    private static HashMap<String,Integer> goblinLevel4() {
+        HashMap<String, Integer> goblinLevel4 = new HashMap<>();
+        goblinLevel4.put("DEF", 1);
+        return goblinLevel4;
+    }
+    private static HashMap<String,Integer> goblinLevel5() {
+        HashMap<String, Integer> goblinLevel5 = new HashMap<>();
+        goblinLevel5.put("ATK", 4);
+        goblinLevel5.put("DEF", 2);
+        return goblinLevel5;
+    }
+
+
     private static HashMap<Integer, HashMap<String, Integer>> adventurerLevels() {
         HashMap<Integer, HashMap<String, Integer>> adventurerLevels = new HashMap<>();
         adventurerLevels.put(1, adventurerLevel1());
@@ -137,6 +169,15 @@ public class UpdatePlayer {
         dwarfLevels.put(4, dwarfLevel4());
         dwarfLevels.put(5, dwarfLevel5());
         return dwarfLevels;
+    }
+    private static HashMap<Integer, HashMap<String, Integer>> goblinLevels() {
+        HashMap<Integer, HashMap<String, Integer>> goblinLevels = new HashMap<>();
+        goblinLevels.put(1, goblinLevel1());
+        goblinLevels.put(2, goblinLevel2());
+        goblinLevels.put(3, goblinLevel3());
+        goblinLevels.put(4, goblinLevel4());
+        goblinLevels.put(5, goblinLevel5());
+        return goblinLevels;
     }
 
     public static boolean addXp(player player, int xp) {

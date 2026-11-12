@@ -7,7 +7,8 @@ public class player {
   public enum AvatarClassAvailable {
       ARCHER,
       ADVENTURER,
-      DWARF
+      DWARF,
+      GOBLIN
   }
     public String playerName;
     public String Avatar_name;
