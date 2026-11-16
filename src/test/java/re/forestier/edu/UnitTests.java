@@ -615,8 +615,55 @@ public class UnitTests {
         player p = new player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>());
         ObjectClass obj = new ObjectClass("Lookout Ring", "Prevents surprise attacks", 50, 100);
         p.inventory.add(obj);
-        p.sell(obj);
+        boolean result = p.sell(obj);
+        assertThat(result, is(true));
         assertThat(p.inventory.size(), is(0));
         assertThat(p.money, is(200));
+    }
+    @Test
+    @DisplayName("Test de la vente d'un objet qu'on ne possède pas")
+    void testSellObjectNotOwned() {
+        player p = new player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>());
+        ObjectClass obj = new ObjectClass("Lookout Ring", "Prevents surprise attacks", 50, 100);
+        boolean result = p.sell(obj);
+        assertThat(result, is(false));
+        assertThat(p.inventory.size(), is(0));
+    }
+    @Test
+    @DisplayName ("Test d'un avatarclass null")
+    void testNullAvatarClass() {
+        player p = new player("Florian", "Grognak le barbare", null, 100, new ArrayList<>());
+        assertThat(p.getAvatarClass(), is(nullValue()));
+    }
+    @Test
+    @DisplayName ("Test de vente d'un objet valide par String")
+    void testSellObjectByName() {
+        player p = new player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>());
+        ObjectClass obj = new ObjectClass("Lookout Ring", "Prevents surprise attacks", 50, 100);
+        p.inventory.add(obj);
+        boolean result = p.sell("Lookout Ring");
+        assertThat(result, is(true));
+        assertThat(p.inventory.size(), is(0));
+    }
+    @Test
+    @DisplayName ("Test de vente d'initialisation d'un objetc avec poid 0")
+    void testObjectClassWeightZero() {
+        ObjectClass obj = new ObjectClass("Feather", "A light feather", 0, 10);
+        assertThat(obj.getWeight(), is(0));
+    }
+    @Test
+    @DisplayName ("Test de vente d'initialisation d'un objetc avec valeur 0")
+    void testObjectClassValueZero() {
+        ObjectClass obj = new ObjectClass("Feather", "A light feather", 10, 0);
+        assertThat(obj.getValue(), is(0));
+    }
+    @Test
+    @DisplayName ("Test est-ce qu'on a l'objet dans l'inventaire")
+    void testHasObjectInInventory() {
+        player p = new player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>());
+        ObjectClass obj = new ObjectClass("Lookout Ring", "Prevents surprise attacks", 50, 100);
+        p.inventory.add(obj);
+        assertThat(p.hasObject("Lookout Ring"), is(true));
+        assertThat(p.hasObject("Magic Bow"), is(false));
     }
 }
