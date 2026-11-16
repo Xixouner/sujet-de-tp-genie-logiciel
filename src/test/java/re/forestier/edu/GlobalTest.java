@@ -19,4 +19,13 @@ public class GlobalTest {
 
         verify(Affichage.afficherJoueur(player));
     }
+    @Test
+    void testAffichageMarkdown() {
+        player player = new player("Florian", "Gnognak le Barbare", "ADVENTURER", 200, new ArrayList<>());
+        UpdatePlayer.addXp(player, 20);
+        player.inventory = new ArrayList<>();
+
+        String affichage = Affichage.afficherJoueurMarkdown(player);
+        verify(affichage);
+    }
 }
