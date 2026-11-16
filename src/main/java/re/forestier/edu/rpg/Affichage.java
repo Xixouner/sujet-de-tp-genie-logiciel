@@ -1,7 +1,12 @@
 package re.forestier.edu.rpg;
 
 public class Affichage {
-
+    /**
+     * Affiche les informations d'un joueur sous forme de chaîne de caractères.
+     *
+     * @param player Le joueur dont les informations doivent être affichées.
+     * @return Une chaîne de caractères représentant les informations du joueur.
+     */
     public static String afficherJoueur(player player) {
         final String[] finalString = {"Joueur " + player.Avatar_name + " joué par " + player.playerName};
         finalString[0] += "\nNiveau : " + player.retrieveLevel() + " (XP totale : " + player.xp + ")";
@@ -16,6 +21,12 @@ public class Affichage {
 
         return finalString[0];
     }
+    /**
+     * Affiche les informations d'un joueur sous forme de chaîne de caractères au format Markdown.
+     *
+     * @param player Le joueur dont les informations doivent être affichées.
+     * @return Une chaîne de caractères représentant les informations du joueur au format Markdown.
+     */
     public static String afficherJoueurMarkdown(player player) {
         final String[] finalString = {"# Joueur " + player.Avatar_name + " joué par " + player.playerName};
         finalString[0] += "\n\n## Niveau : " + player.retrieveLevel() + " (XP totale : " + player.xp + ")";

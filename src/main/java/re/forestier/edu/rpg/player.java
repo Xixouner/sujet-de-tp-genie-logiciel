@@ -23,6 +23,16 @@ public class player {
 
     public HashMap<String, Integer> abilities;
     public ArrayList<ObjectClass> inventory;
+    /**
+     * Constructeur de la classe player.
+     *
+     * @param playerName  Le nom du joueur.
+     * @param avatar_name Le nom de l'avatar du joueur.
+     * @param avatarClass La classe de l'avatar (doit être une valeur valide de AvatarClassAvailable).
+     * @param money       La quantité d'argent du joueur (doit être positive).
+     * @param inventory   L'inventaire du joueur (doit être une liste d'objets ObjectClass).
+     * @throws IllegalArgumentException si la classe de l'avatar est invalide.
+     */
     public player(String playerName, String avatar_name, String avatarClass, int money, ArrayList<ObjectClass> inventory) {
       AvatarClassAvailable avatar;
       if (avatarClass == null) {
@@ -37,7 +47,12 @@ public class player {
         this.playerName = playerName;
         this.Avatar_name = avatar_name;
         this.AvatarClass = avatar;
-        this.money = money;
+        if(money < 0){
+          this.money = 0;
+        }
+        else{
+          this.money = money;
+        }
         this.inventory = inventory;
         this.abilities = UpdatePlayer.abilitiesPerTypeAndLevel().get(AvatarClass).get(1);
     }
@@ -45,13 +60,23 @@ public class player {
     public AvatarClassAvailable getAvatarClass () {
         return AvatarClass;
     }
+    /**
+     * Change la quantité d'argent du joueur.
+     *
+     * @param amount La quantité à ajouter (peut être négative pour retirer de l'argent).
+     * @throws IllegalArgumentException si le montant total d'argent devient négatif.
+     */
     public void changeMoney(int amount){
       if(money + amount < 0){
         throw new IllegalArgumentException("Player can't have a negative money!");
       }
       money += amount;
     }
-    // (lvl-1) * 10 + round((lvl * xplvl-1)/4)
+    /**
+     * Récupère le niveau actuel du joueur en fonction de son expérience (XP).
+     * La methode de calcul (lvl-1) * 10 + round((lvl * xplvl-1)/4)
+     * @return Le niveau actuel du joueur.
+     */
     public int retrieveLevel() {
       int level = 1;
          long previousThreshold = 0;
@@ -69,6 +94,12 @@ public class player {
     public int getXp() {
         return this.xp;
     }
+    /**
+     * Vend un objet du joueur.
+     *
+     * @param object L'objet à vendre.
+     * @return true si l'objet a été vendu, false sinon.
+     */
     public boolean sell(ObjectClass object) {
         if(!inventory.contains(object)) {
             return false;
@@ -87,6 +118,12 @@ public class player {
         }
         return false;
     }
+    /**
+     * Vérifie si le joueur possède un objet.
+     *
+     * @param objectName Le nom de l'objet à vérifier.
+     * @return true si le joueur possède l'objet, false sinon.
+     */
     public boolean hasObject(String objectName) {
         return inventory.stream()
                 .anyMatch(object -> object.getName().equals(objectName));

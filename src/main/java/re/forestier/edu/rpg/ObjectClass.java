@@ -6,6 +6,15 @@ public class ObjectClass {
     private int weight;
     private int price;
 
+    /**
+     * Constructeur de la classe ObjectClass.
+     *
+     * @param name        Le nom de l'objet.
+     * @param description La description de l'objet.
+     * @param weight      Le poids de l'objet (doit être positif).
+     * @param price       La valeur de l'objet (doit être positive).
+     * @throws IllegalArgumentException si le nom ou la description est vide, ou si le poids ou la valeur est négatif.
+     */
     public ObjectClass(String name, String description, int weight, int price) {
         if(name.isEmpty()){
             throw new IllegalArgumentException("Name cannot be null or empty");
