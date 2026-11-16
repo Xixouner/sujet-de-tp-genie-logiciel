@@ -1,3 +1,5 @@
+package re.forestier.edu.rpg;
+
 public class ObjectClass {
     private String name;
     private String description;
