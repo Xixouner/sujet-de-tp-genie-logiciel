@@ -22,8 +22,8 @@ public class player {
 
 
     public HashMap<String, Integer> abilities;
-    public ArrayList<String> inventory;
-    public player(String playerName, String avatar_name, String avatarClass, int money, ArrayList<String> inventory) {
+    public ArrayList<ObjectClass> inventory;
+    public player(String playerName, String avatar_name, String avatarClass, int money, ArrayList<ObjectClass> inventory) {
       AvatarClassAvailable avatar;
       if (avatarClass == null) {
         return;
@@ -69,4 +69,27 @@ public class player {
     public int getXp() {
         return this.xp;
     }
+    public boolean sell(ObjectClass object) {
+        if(!inventory.contains(object)) {
+            return false;
+        }
+        inventory.remove(object);
+        changeMoney(object.getValue());
+        return true;
+    }
+    public boolean sell(String objectName) {
+        for (ObjectClass object : inventory) {
+            if (object.getName().equals(objectName)) {
+                inventory.remove(object);
+                changeMoney(object.getValue());
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean hasObject(String objectName) {
+        return inventory.stream()
+                .anyMatch(object -> object.getName().equals(objectName));
+    }
+
 }

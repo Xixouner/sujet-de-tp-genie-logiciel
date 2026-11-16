@@ -4,6 +4,7 @@ import org.junit.jupiter.api.*;
 import re.forestier.edu.rpg.player;
 import re.forestier.edu.rpg.player.AvatarClassAvailable;
 import re.forestier.edu.rpg.UpdatePlayer;
+import re.forestier.edu.rpg.ObjectClass;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -58,9 +59,9 @@ public class UnitTests {
     @DisplayName ("test dans addxp quand on passe à un niveau superieur ajout dans l'inventaire")
     void testAddXpLevelChangeInventory(){
         player p = new player("Florian","Grognak le barbare","ADVENTURER",100,new ArrayList<>());
-        ArrayList<String> inventoryBefore = new ArrayList<>(p.inventory);
+        ArrayList<ObjectClass> inventoryBefore = new ArrayList<>(p.inventory);
         UpdatePlayer.addXp(p, 11);
-        ArrayList<String> inventoryAfter = new ArrayList<>(p.inventory);
+        ArrayList<ObjectClass> inventoryAfter = new ArrayList<>(p.inventory);
         assertThat(inventoryAfter, is(not(inventoryBefore)));
     }
     @Test
@@ -180,6 +181,7 @@ public class UnitTests {
     @DisplayName("test maj fin de tour avec un archer à moitié de vie exactement")
     void testMajFinDeTourArcherHalfLife() {
         player p = new player("Florian","Grognak le barbare","ARCHER",100,new ArrayList<>());
+        ObjectClass magicBow = new ObjectClass("Magic Bow", "A magical bow that increases your attack power", 100, 200);
         p.currenthealthpoints = 75;
         p.healthpoints = 150;
         UpdatePlayer.majFinDeTour(p);
@@ -188,7 +190,7 @@ public class UnitTests {
         UpdatePlayer.majFinDeTour(p);
         assertThat(p.currenthealthpoints, is(75));
         p.currenthealthpoints = 74;
-        p.inventory.add("Magic Bow");
+        p.inventory.add(magicBow);
         UpdatePlayer.majFinDeTour(p);
         assertThat(p.currenthealthpoints, is(83));
     }
@@ -204,21 +206,23 @@ public class UnitTests {
     @DisplayName ("tester la fonction majFinDeTour avec un archer mais à moitié vie et un arc magique")
     void testMajFinDeTourArcherMidLifeWithMagicBow() {
         player p = new player("Florian", "Grognak le barbare", "ARCHER", 100, new ArrayList<>());
+        ObjectClass magicBow = new ObjectClass("Magic Bow", "A magical bow that increases your attack power", 100, 200);
         p.currenthealthpoints = 70;
         p.healthpoints = 150;
-        p.inventory.add("Magic Bow");
+        p.inventory.add(magicBow);
         UpdatePlayer.majFinDeTour(p);
     }
     @Test
     @DisplayName("test maj fin de tour avec un nain à moitié de vie exactement")
     void testMajFinDeTourDwarfHalfLife() {
         player p = new player("Florian","Grognak le barbare","DWARF",100,new ArrayList<>());
+        ObjectClass elixir = new ObjectClass("Holy Elixir", "Recover your HP", 80, 160);
         p.currenthealthpoints = 75;
         p.healthpoints = 150;
         UpdatePlayer.majFinDeTour(p);
         assertThat(p.currenthealthpoints, is(75));
         p.currenthealthpoints = 74;
-        p.inventory.add("Holy Elixir");
+        p.inventory.add(elixir);
         UpdatePlayer.majFinDeTour(p);
         assertThat(p.currenthealthpoints, is(76));
     }
@@ -234,9 +238,10 @@ public class UnitTests {
     @DisplayName("tester la fonction majFinDeTour avec un nain mais à moitié vie et un elixir")
     void testMajFinDeTourDwarfMidLifeWithElixir() {
         player p = new player("Florian", "Grognak le barbare", "DWARF", 100, new ArrayList<>());
+        ObjectClass elixir = new ObjectClass("Holy Elixir", "Recover your HP", 80, 160);
         p.currenthealthpoints = 70;
         p.healthpoints = 150;
-        p.inventory.add("Holy Elixir");
+        p.inventory.add(elixir);
         UpdatePlayer.majFinDeTour(p);
     }
     @Test
@@ -545,10 +550,10 @@ public class UnitTests {
         assertThat(obj.getWeight(), is(50));
         assertThat(obj.getValue(), is(100));
         player p = new player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>());
-        p.inventory.add(obj.getName());
-        assertThat(p.inventory, hasItem("Lookout Ring"));
+        p.inventory.add(obj);
+        assertThat(p.inventory, hasItem(hasProperty("name", is("Lookout Ring"))));
         assertThat(p.inventory.size(), is(1));
-        assertThat(p.inventory.get(0), is("Lookout Ring"));
+        assertThat(p.inventory.get(0).getName(), is("Lookout Ring"));
         p.sell(obj.getName());
         assertThat(p.inventory.size(), is(0));
         assertThat(p.money, is(200));
@@ -597,23 +602,20 @@ public class UnitTests {
     @DisplayName("Test de la vente d'un objet qui n'est pas dans l'inventaire")
     void testSellObjectNotInInventory() {
         player p = new player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>());
-        p.inventory.add("Lookout Ring");
-        try {
-            p.sell("Magic Bow");
-            fail("Expected IllegalArgumentException for selling an item not in inventory");
-        } catch (IllegalArgumentException e) {
-            assertThat(e.getMessage(), is("Item not found in inventory"));
-        }
+        ObjectClass obj = new ObjectClass("Lookout Ring", "Prevents surprise attacks", 50, 100);
+        p.inventory.add(obj);
+        boolean result = p.sell("Magic Bow");
+        assertThat(result, is(false));
         assertThat(p.inventory.size(), is(1));
-        assertThat(p.inventory, hasItem("Lookout Ring"));
+        assertThat(p.inventory, hasItem(obj));
     }
     @Test
     @DisplayName("Test de la vente d'un objet valeur correcte et inventaire mis à jour")
     void testSellObjectUpdatesInventoryAndMoney() {
         player p = new player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>());
         ObjectClass obj = new ObjectClass("Lookout Ring", "Prevents surprise attacks", 50, 100);
-        p.inventory.add(obj.getName());
-        p.sell(obj.getName());
+        p.inventory.add(obj);
+        p.sell(obj);
         assertThat(p.inventory.size(), is(0));
         assertThat(p.money, is(200));
     }

@@ -7,7 +7,7 @@ import re.forestier.edu.rpg.player.AvatarClassAvailable;
 
 public class UpdatePlayer {
 
-    private final static String[] objectList = {"Lookout Ring : Prevents surprise attacks","Scroll of Stupidity : INT-2 when applied to an enemy", "Draupnir : Increases XP gained by 100%", "Magic Charm : Magic +10 for 5 rounds", "Rune Staff of Curse : May burn your ennemies... Or yourself. Who knows?", "Combat Edge : Well, that's an edge", "Holy Elixir : Recover your HP"
+    private final static ObjectClass[] objectList = {new ObjectClass("Lookout Ring", "Prevents surprise attacks", 50, 100), new ObjectClass("Scroll of Stupidity", "INT-2 when applied to an enemy", 25, 50), new ObjectClass("Draupnir", "Increases XP gained by 100%", 100, 200), new ObjectClass("Magic Charm", "Magic +10 for 5 rounds", 75, 150), new ObjectClass("Rune Staff of Curse", "May burn your ennemies... Or yourself. Who knows?", 125, 250), new ObjectClass("Combat Edge", "Well, that's an edge", 60, 120), new ObjectClass("Holy Elixir", "Recover your HP", 80, 160)
     };
 
 
@@ -228,12 +228,12 @@ public class UpdatePlayer {
                 break;
             case ARCHER:
                 player.currenthealthpoints++;
-                if(player.inventory.contains("Magic Bow")) {
+                if(player.hasObject("Magic Bow")) {
                     player.currenthealthpoints += player.currenthealthpoints/8-1;
                 }
                 break;
             case DWARF:
-                if(player.inventory.contains("Holy Elixir")) {
+                if(player.hasObject("Holy Elixir")) {
                   player.currenthealthpoints+=1;
                 }
                 player.currenthealthpoints+=1;
