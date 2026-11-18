@@ -2,6 +2,7 @@ package re.forestier.edu.rpg;
 
 import java.util.HashMap;
 import java.util.Random;
+import java.util.List;
 
 import re.forestier.edu.rpg.player.AvatarClassAvailable;
 
@@ -28,162 +29,88 @@ public class UpdatePlayer {
         return abilitiesPerTypeAndLevel;
     }
     private static HashMap<String, Integer> adventurerLevel1() {
-        HashMap<String, Integer> adventurerLevel1 = new HashMap<>();
-        adventurerLevel1.put("INT", 1);
-        adventurerLevel1.put("DEF", 1);
-        adventurerLevel1.put("ATK", 3);
-        adventurerLevel1.put("CHA", 2);
-        return adventurerLevel1;
+        return new Stats(1, 3, 2, 1, 0, 0).getStatsAsHashMap();
     }
     private static HashMap<String, Integer> adventurerLevel2() {
-      HashMap<String, Integer> adventurerLevel2 = new HashMap<>();
-      adventurerLevel2.put("INT", 2);
-      adventurerLevel2.put("CHA", 3);
-      return adventurerLevel2;
+      return new Stats(1, 3, 3, 2, 0, 0).getStatsAsHashMap();
     }
     private static HashMap<String, Integer> adventurerLevel3() {
-      HashMap<String, Integer> adventurerLevel3 = new HashMap<>();
-      adventurerLevel3.put("ATK", 5);
-      adventurerLevel3.put("ALC", 1);
-      return adventurerLevel3;
+      return new Stats(1, 5, 3, 2, 1, 0).getStatsAsHashMap();
     }
     private static HashMap<String, Integer> adventurerLevel4() {
-      HashMap<String, Integer> adventurerLevel4 = new HashMap<>();
-      adventurerLevel4.put("DEF", 3);
-      return adventurerLevel4;
+      return new Stats(3, 5, 3, 2, 1, 0).getStatsAsHashMap();
     }
     private static HashMap<String, Integer> adventurerLevel5() {
-      HashMap<String, Integer> adventurerLevel5 = new HashMap<>();
-      adventurerLevel5.put("VIS", 1);
-      adventurerLevel5.put("DEF", 4);
-      return adventurerLevel5;
+      return new Stats(4, 5, 3, 2, 1, 1).getStatsAsHashMap();
     }
 
     private static HashMap<String, Integer> archerLevel1() {
-        HashMap<String, Integer> archerLevel1 = new HashMap<>();
-        archerLevel1.put("INT", 1);
-        archerLevel1.put("ATK", 3);
-        archerLevel1.put("CHA", 1);
-        archerLevel1.put("VIS", 3);
-        return archerLevel1;
+        return new Stats(0, 3, 1, 1, 0, 3).getStatsAsHashMap();
     }
     private static HashMap<String, Integer> archerLevel2() {
-        HashMap<String, Integer> archerLevel2 = new HashMap<>();
-        archerLevel2.put("DEF", 1);
-        archerLevel2.put("CHA", 2);
-        return archerLevel2;
+        return new Stats(1, 3, 2, 1, 0, 3).getStatsAsHashMap();
     }
     private static HashMap<String, Integer> archerLevel3() {
-        HashMap<String, Integer> archerLevel3 = new HashMap<>();
-        archerLevel3.put("ATK", 3);// ne sert à rien, mais c'est pour montrer que l'archer est plus fort que les autres classes
-        return archerLevel3;
+        return new Stats(1, 3, 2, 1, 0, 3).getStatsAsHashMap(); // ne sert à rien, mais c'est pour montrer que l'archer est plus fort que les autres classes
     }
     private static HashMap<String, Integer> archerLevel4() {
-        HashMap<String, Integer> archerLevel4 = new HashMap<>();
-        archerLevel4.put("DEF", 2);
-        return archerLevel4;
+        return new Stats(2, 3, 2, 1, 0, 3).getStatsAsHashMap();
     }
     private static HashMap<String, Integer> archerLevel5() {
-        HashMap<String, Integer> archerLevel5 = new HashMap<>();
-        archerLevel5.put("ATK", 4);
-        return archerLevel5;
+        return new Stats(2, 4, 2, 1, 0, 3).getStatsAsHashMap();
     }
 
     private static HashMap<String, Integer> dwarfLevel1() {
-        HashMap<String, Integer> dwarfLevel1 = new HashMap<>();
-        dwarfLevel1.put("ALC", 4);
-        dwarfLevel1.put("INT", 1);
-        dwarfLevel1.put("ATK", 3);
-        return dwarfLevel1;
+        return new Stats(0,3,0,1,4,0).getStatsAsHashMap();
     }
     private static HashMap<String, Integer> dwarfLevel2() {
-        HashMap<String, Integer> dwarfLevel2 = new HashMap<>();
-        dwarfLevel2.put("DEF", 1);
-        dwarfLevel2.put("ALC", 5);
-        return dwarfLevel2;
+        return new Stats(1, 3, 0, 1, 5, 0).getStatsAsHashMap();
     }
     private static HashMap<String, Integer> dwarfLevel3() {
-        HashMap<String, Integer> dwarfLevel3 = new HashMap<>();
-        dwarfLevel3.put("ATK", 4);
-        return dwarfLevel3;
+        return new Stats(1, 4, 0, 1, 5, 0).getStatsAsHashMap();
     }
     private static HashMap<String, Integer> dwarfLevel4() {
-        HashMap<String, Integer> dwarfLevel4 = new HashMap<>();
-        dwarfLevel4.put("DEF", 2);
-        return dwarfLevel4;
+        return new Stats(2, 4, 0, 1, 5, 0).getStatsAsHashMap();
     }
     private static HashMap<String, Integer> dwarfLevel5() {
-        HashMap<String, Integer> dwarfLevel5 = new HashMap<>();
-        dwarfLevel5.put("CHA", 1);
-        return dwarfLevel5;
+        return new Stats(2, 4, 1, 1, 5, 0).getStatsAsHashMap();
     }
 
     private static HashMap<String,Integer> goblinLevel1() {
-        HashMap<String, Integer> goblinLevel1 = new HashMap<>();
-        goblinLevel1.put("INT", 2);
-        goblinLevel1.put("ATK", 2);
-        goblinLevel1.put("ALC", 1);
-        return goblinLevel1;
+        return new Stats(0, 2, 0, 2, 1, 0).getStatsAsHashMap();
     }
     private static HashMap<String,Integer> goblinLevel2() {
-        HashMap<String, Integer> goblinLevel2 = new HashMap<>();
-        goblinLevel2.put("ATK", 3);
-        goblinLevel2.put("ALC", 4);
-        return goblinLevel2;
+        return new Stats(0, 3, 0, 2, 4, 0).getStatsAsHashMap();
     }
     private static HashMap<String,Integer> goblinLevel3() {
-        HashMap<String, Integer> goblinLevel3 = new HashMap<>();
-        goblinLevel3.put("VIS", 1);
-        return goblinLevel3;
+        return new Stats(0, 3, 0, 2, 4, 1).getStatsAsHashMap();
     }
     private static HashMap<String,Integer> goblinLevel4() {
-        HashMap<String, Integer> goblinLevel4 = new HashMap<>();
-        goblinLevel4.put("DEF", 1);
-        return goblinLevel4;
+        return new Stats(1, 3, 0, 2, 4, 1).getStatsAsHashMap();
     }
     private static HashMap<String,Integer> goblinLevel5() {
-        HashMap<String, Integer> goblinLevel5 = new HashMap<>();
-        goblinLevel5.put("ATK", 4);
-        goblinLevel5.put("DEF", 2);
-        return goblinLevel5;
+        return new Stats(2, 4, 0, 2, 4, 1).getStatsAsHashMap();
     }
 
+    private static HashMap<Integer, HashMap<String, Integer>> levels(List<HashMap<String,Integer>> abilities) {
+        HashMap<Integer, HashMap<String, Integer>> Levels = new HashMap<>();
+        for (int i = 1; i <= abilities.size(); i++) {
+            Levels.put(i, abilities.get(i - 1));
+        }
+        return Levels;
 
+    }
     private static HashMap<Integer, HashMap<String, Integer>> adventurerLevels() {
-        HashMap<Integer, HashMap<String, Integer>> adventurerLevels = new HashMap<>();
-        adventurerLevels.put(1, adventurerLevel1());
-        adventurerLevels.put(2, adventurerLevel2());
-        adventurerLevels.put(3, adventurerLevel3());
-        adventurerLevels.put(4, adventurerLevel4());
-        adventurerLevels.put(5, adventurerLevel5());
-        return adventurerLevels;
+        return levels(List.of(adventurerLevel1(), adventurerLevel2(), adventurerLevel3(), adventurerLevel4(), adventurerLevel5()));
     }
     private static HashMap<Integer, HashMap<String, Integer>> archerLevels() {
-        HashMap<Integer, HashMap<String, Integer>> archerLevels = new HashMap<>();
-        archerLevels.put(1, archerLevel1());
-        archerLevels.put(2, archerLevel2());
-        archerLevels.put(3, archerLevel3());
-        archerLevels.put(4, archerLevel4());
-        archerLevels.put(5, archerLevel5());
-        return archerLevels;
+        return levels(List.of(archerLevel1(), archerLevel2(), archerLevel3(), archerLevel4(), archerLevel5()));
     }
     private static HashMap<Integer, HashMap<String, Integer>> dwarfLevels() {
-        HashMap<Integer, HashMap<String, Integer>> dwarfLevels = new HashMap<>();
-        dwarfLevels.put(1, dwarfLevel1());
-        dwarfLevels.put(2, dwarfLevel2());
-        dwarfLevels.put(3, dwarfLevel3());
-        dwarfLevels.put(4, dwarfLevel4());
-        dwarfLevels.put(5, dwarfLevel5());
-        return dwarfLevels;
+        return levels(List.of(dwarfLevel1(), dwarfLevel2(), dwarfLevel3(), dwarfLevel4(), dwarfLevel5()));
     }
     private static HashMap<Integer, HashMap<String, Integer>> goblinLevels() {
-        HashMap<Integer, HashMap<String, Integer>> goblinLevels = new HashMap<>();
-        goblinLevels.put(1, goblinLevel1());
-        goblinLevels.put(2, goblinLevel2());
-        goblinLevels.put(3, goblinLevel3());
-        goblinLevels.put(4, goblinLevel4());
-        goblinLevels.put(5, goblinLevel5());
-        return goblinLevels;
+        return levels(List.of(goblinLevel1(), goblinLevel2(), goblinLevel3(), goblinLevel4(), goblinLevel5()));
     }
 
     /**

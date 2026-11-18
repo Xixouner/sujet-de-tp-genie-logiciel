@@ -3,8 +3,10 @@
 ## Niveau : 2 (XP totale : 20)
 
 ## Capacités :
+- **VIS** : 0
 - **DEF** : 1
 - **ATK** : 3
+- **ALC** : 0
 - **CHA** : 3
 - **INT** : 2
 
