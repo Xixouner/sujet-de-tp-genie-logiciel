@@ -22,8 +22,8 @@ public class UnitTests {
     void testAddAbilitiesWhenAddingXp(){
         player p = new player("Florian","Grognak le barbare","DWARF",100,new ArrayList<>());
         UpdatePlayer.addXp(p, 11);
-        assertThat(p.abilities.get("DEF"), is(1));
-        assertThat(p.abilities.get("ALC"), is(5));
+        assertThat(p.abilities.getDEF(), is(1));
+        assertThat(p.abilities.getALC(), is(5));
     }
 
     @Test
@@ -312,20 +312,20 @@ public class UnitTests {
     @DisplayName ("test d'aventurier level 1 et les abilités qu'il a au départ")
     void testAdventurerLevel1Abilities() {
         player p = new player("Florian","Grognak le barbare","ADVENTURER",100,new ArrayList<>());
-        assertThat(p.abilities.get("ATK"), is(3));
-        assertThat(p.abilities.get("DEF"), is(1));
-        assertThat(p.abilities.get("INT"), is(1));
-        assertThat(p.abilities.get("CHA"), is(2));
+        assertThat(p.abilities.getATK(), is(3));
+        assertThat(p.abilities.getDEF(), is(1));
+        assertThat(p.abilities.getINT(), is(1));
+        assertThat(p.abilities.getCHA(), is(2));
     }
     @Test
     @DisplayName ("test d'aventurier level 2 et les abilités qu'il a après avoir gagné de l'xp")
     void testAdventurerLevel2Abilities() {
         player p = new player("Florian","Grognak le barbare","ADVENTURER",100,new ArrayList<>());
         UpdatePlayer.addXp(p, 11);
-        assertThat(p.abilities.get("ATK"), is(3));
-        assertThat(p.abilities.get("DEF"), is(1));
-        assertThat(p.abilities.get("INT"), is(2));
-        assertThat(p.abilities.get("CHA"), is(3));
+        assertThat(p.abilities.getATK(), is(3));
+        assertThat(p.abilities.getDEF(), is(1));
+        assertThat(p.abilities.getINT(), is(2));
+        assertThat(p.abilities.getCHA(), is(3));
     }
     @Test
     @DisplayName ("test d'aventurier level 3 et les abilités qu'il a après avoir gagné de l'xp")
@@ -333,11 +333,11 @@ public class UnitTests {
         player p = new player("Florian","Grognak le barbare","ADVENTURER",100,new ArrayList<>());
         UpdatePlayer.addXp(p, 10);
         UpdatePlayer.addXp(p, 17);
-        assertThat(p.abilities.get("DEF"), is(1));
-        assertThat(p.abilities.get("INT"), is(2));
-        assertThat(p.abilities.get("CHA"), is(3));
-        assertThat(p.abilities.get("ATK"), is(5));
-        assertThat(p.abilities.get("ALC"), is(1));
+        assertThat(p.abilities.getDEF(), is(1));
+        assertThat(p.abilities.getINT(), is(2));
+        assertThat(p.abilities.getCHA(), is(3));
+        assertThat(p.abilities.getATK(), is(5));
+        assertThat(p.abilities.getALC(), is(1));
     }
      @Test
     @DisplayName ("test d'aventurier level 4 et les abilités qu'il a après avoir gagné de l'xp")
@@ -346,11 +346,11 @@ public class UnitTests {
         UpdatePlayer.addXp(p, 10);
         UpdatePlayer.addXp(p, 17);
         UpdatePlayer.addXp(p, 30);
-        assertThat(p.abilities.get("DEF"), is(3));
-        assertThat(p.abilities.get("INT"), is(2));
-        assertThat(p.abilities.get("CHA"), is(3));
-        assertThat(p.abilities.get("ATK"), is(5));
-        assertThat(p.abilities.get("ALC"), is(1));
+        assertThat(p.abilities.getDEF(), is(3));
+        assertThat(p.abilities.getINT(), is(2));
+        assertThat(p.abilities.getCHA(), is(3));
+        assertThat(p.abilities.getATK(), is(5));
+        assertThat(p.abilities.getALC(), is(1));
     }
     @Test
     @DisplayName ("test d'aventurier level 5 et les abilités qu'il a après avoir gagné de l'xp")
@@ -360,32 +360,32 @@ public class UnitTests {
         UpdatePlayer.addXp(p, 17);
         UpdatePlayer.addXp(p, 30);
         UpdatePlayer.addXp(p, 54);
-        assertThat(p.abilities.get("DEF"), is(4));
-        assertThat(p.abilities.get("INT"), is(2));
-        assertThat(p.abilities.get("CHA"), is(3));
-        assertThat(p.abilities.get("ATK"), is(5));
-        assertThat(p.abilities.get("ALC"), is(1));
-        assertThat(p.abilities.get("VIS"), is(1));
+        assertThat(p.abilities.getDEF(), is(4));
+        assertThat(p.abilities.getINT(), is(2));
+        assertThat(p.abilities.getCHA(), is(3));
+        assertThat(p.abilities.getATK(), is(5));
+        assertThat(p.abilities.getALC(), is(1));
+        assertThat(p.abilities.getVIS(), is(1));
     }
     @Test
     @DisplayName ("test d'archer level 1 et les abilités qu'il a au départ")
     void testArcherLevel1Abilities() {
         player p = new player("Florian","Grognak le barbare","ARCHER",100,new ArrayList<>());
-        assertThat(p.abilities.get("ATK"), is(3));
-        assertThat(p.abilities.get("INT"), is(1));
-        assertThat(p.abilities.get("CHA"), is(1));
-        assertThat(p.abilities.get("VIS"), is(3));
+        assertThat(p.abilities.getATK(), is(3));
+        assertThat(p.abilities.getINT(), is(1));
+        assertThat(p.abilities.getCHA(), is(1));
+        assertThat(p.abilities.getVIS(), is(3));
     }
     @Test
     @DisplayName ("test d'archer level 2 et les abilités qu'il a après avoir gagné de l'xp")
     void testArcherLevel2Abilities() {
         player p = new player("Florian","Grognak le barbare","ARCHER",100,new ArrayList<>());
         UpdatePlayer.addXp(p, 11);
-        assertThat(p.abilities.get("ATK"), is(3));
-        assertThat(p.abilities.get("INT"), is(1));
-        assertThat(p.abilities.get("CHA"), is(2));
-        assertThat(p.abilities.get("VIS"), is(3));
-        assertThat(p.abilities.get("DEF"), is(1));
+        assertThat(p.abilities.getATK(), is(3));
+        assertThat(p.abilities.getINT(), is(1));
+        assertThat(p.abilities.getCHA(), is(2));
+        assertThat(p.abilities.getVIS(), is(3));
+        assertThat(p.abilities.getDEF(), is(1));
     }
     @Test
     @DisplayName ("test d'archer level 3 et les abilités qu'il a après avoir gagné de l'xp")
@@ -393,11 +393,11 @@ public class UnitTests {
         player p = new player("Florian","Grognak le barbare","ARCHER",100,new ArrayList<>());
         UpdatePlayer.addXp(p, 10);
         UpdatePlayer.addXp(p, 17);
-        assertThat(p.abilities.get("ATK"), is(3));
-        assertThat(p.abilities.get("INT"), is(1));
-        assertThat(p.abilities.get("CHA"), is(2));
-        assertThat(p.abilities.get("VIS"), is(3));
-        assertThat(p.abilities.get("DEF"), is(1));
+        assertThat(p.abilities.getATK(), is(3));
+        assertThat(p.abilities.getINT(), is(1));
+        assertThat(p.abilities.getCHA(), is(2));
+        assertThat(p.abilities.getVIS(), is(3));
+        assertThat(p.abilities.getDEF(), is(1));
     }
     @Test
     @DisplayName ("test d'archer level 4 et les abilités qu'il a après avoir gagné de l'xp")
@@ -406,11 +406,11 @@ public class UnitTests {
         UpdatePlayer.addXp(p, 10);
         UpdatePlayer.addXp(p, 17);
         UpdatePlayer.addXp(p, 30);
-        assertThat(p.abilities.get("ATK"), is(3));
-        assertThat(p.abilities.get("INT"), is(1));
-        assertThat(p.abilities.get("CHA"), is(2));
-        assertThat(p.abilities.get("VIS"), is(3));
-        assertThat(p.abilities.get("DEF"), is(2));
+        assertThat(p.abilities.getATK(), is(3));
+        assertThat(p.abilities.getINT(), is(1));
+        assertThat(p.abilities.getCHA(), is(2));
+        assertThat(p.abilities.getVIS(), is(3));
+        assertThat(p.abilities.getDEF(), is(2));
     }
     @Test
     @DisplayName ("test d'archer level 5 et les abilités qu'il a après avoir gagné de l'xp")
@@ -420,29 +420,29 @@ public class UnitTests {
         UpdatePlayer.addXp(p, 17);
         UpdatePlayer.addXp(p, 30);
         UpdatePlayer.addXp(p, 54);
-        assertThat(p.abilities.get("ATK"), is(4));
-        assertThat(p.abilities.get("INT"), is(1));
-        assertThat(p.abilities.get("CHA"), is(2));
-        assertThat(p.abilities.get("VIS"), is(3));
-        assertThat(p.abilities.get("DEF"), is(2));
+        assertThat(p.abilities.getATK(), is(4));
+        assertThat(p.abilities.getINT(), is(1));
+        assertThat(p.abilities.getCHA(), is(2));
+        assertThat(p.abilities.getVIS(), is(3));
+        assertThat(p.abilities.getDEF(), is(2));
     }
     @Test
     @DisplayName ("test de nain level 1 et les abilités qu'il a au départ")
     void testDwarfLevel1Abilities() {
         player p = new player("Florian","Grognak le barbare","DWARF",100,new ArrayList<>());
-        assertThat(p.abilities.get("ATK"), is(3));
-        assertThat(p.abilities.get("INT"), is(1));
-        assertThat(p.abilities.get("ALC"), is(4));
+        assertThat(p.abilities.getATK(), is(3));
+        assertThat(p.abilities.getINT(), is(1));
+        assertThat(p.abilities.getALC(), is(4));
     }
     @Test
     @DisplayName ("test de nain level 2 et les abilités qu'il a après avoir gagné de l'xp")
     void testDwarfLevel2Abilities() {
         player p = new player("Florian","Grognak le barbare","DWARF",100,new ArrayList<>());
         UpdatePlayer.addXp(p, 11);
-        assertThat(p.abilities.get("ATK"), is(3));
-        assertThat(p.abilities.get("INT"), is(1));
-        assertThat(p.abilities.get("ALC"), is(5));
-        assertThat(p.abilities.get("DEF"), is(1));
+        assertThat(p.abilities.getATK(), is(3));
+        assertThat(p.abilities.getINT(), is(1));
+        assertThat(p.abilities.getALC(), is(5));
+        assertThat(p.abilities.getDEF(), is(1));
     }
     @Test
     @DisplayName ("test de nain level 3 et les abilités qu'il a après avoir gagné de l'xp")
@@ -450,10 +450,10 @@ public class UnitTests {
         player p = new player("Florian","Grognak le barbare","DWARF",100,new ArrayList<>());
         UpdatePlayer.addXp(p, 10);
         UpdatePlayer.addXp(p, 17);
-        assertThat(p.abilities.get("ATK"), is(4));
-        assertThat(p.abilities.get("INT"), is(1));
-        assertThat(p.abilities.get("ALC"), is(5));
-        assertThat(p.abilities.get("DEF"), is(1));
+        assertThat(p.abilities.getATK(), is(4));
+        assertThat(p.abilities.getINT(), is(1));
+        assertThat(p.abilities.getALC(), is(5));
+        assertThat(p.abilities.getDEF(), is(1));
     }
     @Test
     @DisplayName ("test de nain level 4 et les abilités qu'il a après avoir gagné de l'xp")
@@ -462,10 +462,10 @@ public class UnitTests {
         UpdatePlayer.addXp(p, 10);
         UpdatePlayer.addXp(p, 17);
         UpdatePlayer.addXp(p, 30);
-        assertThat(p.abilities.get("ATK"), is(4));
-        assertThat(p.abilities.get("INT"), is(1));
-        assertThat(p.abilities.get("ALC"), is(5));
-        assertThat(p.abilities.get("DEF"), is(2));
+        assertThat(p.abilities.getATK(), is(4));
+        assertThat(p.abilities.getINT(), is(1));
+        assertThat(p.abilities.getALC(), is(5));
+        assertThat(p.abilities.getDEF(), is(2));
     }
     @Test
     @DisplayName ("test de nain level 5 et les abilités qu'il a après avoir gagné de l'xp")
@@ -475,71 +475,71 @@ public class UnitTests {
         UpdatePlayer.addXp(p, 17);
         UpdatePlayer.addXp(p, 30);
         UpdatePlayer.addXp(p, 54);
-        assertThat(p.abilities.get("ATK"), is(4));
-        assertThat(p.abilities.get("INT"), is(1));
-        assertThat(p.abilities.get("ALC"), is(5));
-        assertThat(p.abilities.get("DEF"), is(2));
-        assertThat(p.abilities.get("CHA"), is(1));
+        assertThat(p.abilities.getATK(), is(4));
+        assertThat(p.abilities.getINT(), is(1));
+        assertThat(p.abilities.getALC(), is(5));
+        assertThat(p.abilities.getDEF(), is(2));
+        assertThat(p.abilities.getCHA(), is(1));
     }
     @Test
     @DisplayName("Passer plusieurs niveaux d'un coup et vérifier que les abilités sont correctes")
     void testMultipleLevelUpAbilities() {
         player p = new player("Florian","Grognak le barbare","ADVENTURER",100,new ArrayList<>());
         UpdatePlayer.addXp(p, 100); // devrait passer du niveau 1 au niveau 4
-        assertThat(p.abilities.get("DEF"), is(3));
-        assertThat(p.abilities.get("INT"), is(2));
-        assertThat(p.abilities.get("CHA"), is(3));
-        assertThat(p.abilities.get("ATK"), is(5));
-        assertThat(p.abilities.get("ALC"), is(1));
+        assertThat(p.abilities.getDEF(), is(3));
+        assertThat(p.abilities.getINT(), is(2));
+        assertThat(p.abilities.getCHA(), is(3));
+        assertThat(p.abilities.getATK(), is(5));
+        assertThat(p.abilities.getALC(), is(1));
     }
     @Test
     @DisplayName("Gobelin level 1 abilities")
     void testGoblinLevel1Abilities() {
         player p = new player("Florian","Grognak le barbare","GOBLIN",100,new ArrayList<>());
-        assertThat(p.abilities.get("ATK"), is(2));
-        assertThat(p.abilities.get("INT"), is(2));
-        assertThat(p.abilities.get("ALC"), is(1));
+        assertThat(p.abilities.getATK(), is(2));
+        assertThat(p.abilities.getINT(), is(2));
+        assertThat(p.abilities.getALC(), is(1));
     }
     @Test
     @DisplayName("Gobelin level 2 abilities")
     void testGoblinLevel2Abilities() {
         player p = new player("Florian","Grognak le barbare","GOBLIN",100,new ArrayList<>());
         UpdatePlayer.addXp(p, 11);
-        assertThat(p.abilities.get("ATK"), is(3));
-        assertThat(p.abilities.get("INT"), is(2));
-        assertThat(p.abilities.get("ALC"), is(4));
+        assertThat(p.abilities.getATK(), is(3));
+        assertThat(p.abilities.getINT(), is(2));
+        assertThat(p.abilities.getALC(), is(4));
     }
     @Test
     @DisplayName("Gobelin level 3 abilities")
     void testGoblinLevel3Abilities() {
         player p = new player("Florian","Grognak le barbare","GOBLIN",100,new ArrayList<>());
         UpdatePlayer.addXp(p, 27);
-        assertThat(p.abilities.get("ATK"), is(3));
-        assertThat(p.abilities.get("INT"), is(2));
-        assertThat(p.abilities.get("ALC"), is(4));
-        assertThat(p.abilities.get("VIS"), is(1));
+        assertThat(p.abilities.getATK(), is(3));
+        assertThat(p.abilities.getINT(), is(2));
+        assertThat(p.abilities.getALC(), is(4));
+        assertThat(p.abilities.getVIS(), is(1));
     }
     @Test
     @DisplayName("Gobelin level 4 abilities")
     void testGoblinLevel4Abilities() {
         player p = new player("Florian","Grognak le barbare","GOBLIN",100,new ArrayList<>());
         UpdatePlayer.addXp(p, 57);
-        assertThat(p.abilities.get("ATK"), is(3));
-        assertThat(p.abilities.get("INT"), is(2));
-        assertThat(p.abilities.get("ALC"), is(4));
-        assertThat(p.abilities.get("VIS"), is(1));
-        assertThat(p.abilities.get("DEF"), is(1));
+        assertThat(p.abilities.getATK(), is(3));
+        assertThat(p.abilities.getINT(), is(2));
+        assertThat(p.abilities.getALC(), is(4));
+        assertThat(p.abilities.getVIS(), is(1));
+        assertThat(p.abilities.getDEF(), is(1));
     }
     @Test
     @DisplayName("Gobelin level 5 abilities")
     void testGoblinLevel5Abilities() {
         player p = new player("Florian","Grognak le barbare","GOBLIN",100,new ArrayList<>());
         UpdatePlayer.addXp(p, 111);
-        assertThat(p.abilities.get("ATK"), is(4));
-        assertThat(p.abilities.get("INT"), is(2));
-        assertThat(p.abilities.get("ALC"), is(4));
-        assertThat(p.abilities.get("VIS"), is(1));
-        assertThat(p.abilities.get("DEF"), is(2));
+        assertThat(p.abilities.getATK(), is(4));
+        assertThat(p.abilities.getINT(), is(2));
+        assertThat(p.abilities.getALC(), is(4));
+        assertThat(p.abilities.getVIS(), is(1));
+        assertThat(p.abilities.getDEF(), is(2));
     }
     @Test
     @DisplayName("Test la classe objet avec des valeurs valides (fourre tout de tests)")
@@ -562,7 +562,7 @@ public class UnitTests {
     @DisplayName("Test la classe objet avec le nom invalide")
     void testInvalidObjectClassName() {
         try {
-            ObjectClass obj = new ObjectClass("", "Prevents surprise attacks", 50, 100);
+            new ObjectClass("", "Prevents surprise attacks", 50, 100);
             fail("Expected IllegalArgumentException for empty name");
         } catch (IllegalArgumentException e) {
             assertThat(e.getMessage(), is("Name cannot be null or empty"));
@@ -572,7 +572,7 @@ public class UnitTests {
     @DisplayName("Test la classe objet avec le poids invalide")
     void testInvalidObjectClassWeight() {
         try {
-            ObjectClass obj = new ObjectClass("Lookout Ring", "Prevents surprise attacks", -10, 100);
+            new ObjectClass("Lookout Ring", "Prevents surprise attacks", -10, 100);
             fail("Expected IllegalArgumentException for negative weight");
         } catch (IllegalArgumentException e) {
             assertThat(e.getMessage(), is("Weight cannot be negative"));
@@ -582,7 +582,7 @@ public class UnitTests {
     @DisplayName("Test la classe objet avec la valeur invalide")
     void testInvalidObjectClassValue() {
         try {
-            ObjectClass obj = new ObjectClass("Lookout Ring", "Prevents surprise attacks", 50, -100);
+            new ObjectClass("Lookout Ring", "Prevents surprise attacks", 50, -100);
             fail("Expected IllegalArgumentException for negative value");
         } catch (IllegalArgumentException e) {
             assertThat(e.getMessage(), is("Value cannot be negative"));
@@ -592,7 +592,7 @@ public class UnitTests {
     @DisplayName("Test la classe objet avec la description invalide")
     void testInvalidObjectClassDescription() {
         try {
-            ObjectClass obj = new ObjectClass("Lookout Ring", "", 50, 100);
+            new ObjectClass("Lookout Ring", "", 50, 100);
             fail("Expected IllegalArgumentException for empty description");
         } catch (IllegalArgumentException e) {
             assertThat(e.getMessage(), is("Description cannot be null or empty"));

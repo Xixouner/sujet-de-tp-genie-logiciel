@@ -17,6 +17,9 @@ public class Stats {
     this.ALC = ALC;
     this.VIS = VIS;
   }
+  public Stats(Stats other) {
+    this(other.DEF, other.ATK, other.CHA, other.INT, other.ALC, other.VIS);
+  }
   public HashMap<String, Integer> getStatsAsHashMap() {
     HashMap<String, Integer> statsMap = new HashMap<>();
     statsMap.put("DEF", DEF);
@@ -26,5 +29,23 @@ public class Stats {
     statsMap.put("ALC", ALC);
     statsMap.put("VIS", VIS);
     return statsMap;
+  }
+  public int getDEF() {
+    return DEF;
+  }
+  public int getATK() {
+    return ATK;
+  }
+  public int getCHA() {
+    return CHA;
+  }
+  public int getINT() {
+    return INT;
+  }
+  public int getALC() {
+    return ALC;
+  }
+  public int getVIS() {
+    return VIS;
   }
 }

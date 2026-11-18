@@ -1,7 +1,6 @@
 package re.forestier.edu.rpg;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class player {
   public enum AvatarClassAvailable {
@@ -19,9 +18,7 @@ public class player {
     public int healthpoints;
     public int currenthealthpoints;
     protected int xp;
-
-
-    public HashMap<String, Integer> abilities;
+    public Stats abilities;
     public ArrayList<ObjectClass> inventory;
     /**
      * Constructeur de la classe player.
@@ -54,7 +51,7 @@ public class player {
           this.money = money;
         }
         this.inventory = inventory;
-        this.abilities = UpdatePlayer.abilitiesPerTypeAndLevel().get(AvatarClass).get(1);
+        this.abilities = AvatarStats.forLevel(avatar, 1);
     }
 
     public AvatarClassAvailable getAvatarClass () {

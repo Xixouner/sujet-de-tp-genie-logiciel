@@ -11,7 +11,7 @@ public class Affichage {
         final String[] finalString = {"Joueur " + player.Avatar_name + " joué par " + player.playerName};
         finalString[0] += "\nNiveau : " + player.retrieveLevel() + " (XP totale : " + player.xp + ")";
         finalString[0] += "\n\nCapacités :";
-        player.abilities.forEach((name, level) -> {
+        player.abilities.getStatsAsHashMap().forEach((name, level) -> {
             finalString[0] += "\n   " + name + " : " + level;
         });
         finalString[0] += "\n\nInventaire :";
@@ -31,7 +31,7 @@ public class Affichage {
         final String[] finalString = {"# Joueur " + player.Avatar_name + " joué par " + player.playerName};
         finalString[0] += "\n\n## Niveau : " + player.retrieveLevel() + " (XP totale : " + player.xp + ")";
         finalString[0] += "\n\n## Capacités :";
-        player.abilities.forEach((name, level) -> {
+        player.abilities.getStatsAsHashMap().forEach((name, level) -> {
             finalString[0] += "\n- **" + name + "** : " + level;
         });
         finalString[0] += "\n\n## Inventaire :";

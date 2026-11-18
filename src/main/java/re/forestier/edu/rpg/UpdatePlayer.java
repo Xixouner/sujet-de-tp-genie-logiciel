@@ -1,117 +1,11 @@
 package re.forestier.edu.rpg;
 
-import java.util.HashMap;
 import java.util.Random;
-import java.util.List;
-
-import re.forestier.edu.rpg.player.AvatarClassAvailable;
 
 public class UpdatePlayer {
 
     private final static ObjectClass[] objectList = {new ObjectClass("Lookout Ring", "Prevents surprise attacks", 50, 100), new ObjectClass("Scroll of Stupidity", "INT-2 when applied to an enemy", 25, 50), new ObjectClass("Draupnir", "Increases XP gained by 100%", 100, 200), new ObjectClass("Magic Charm", "Magic +10 for 5 rounds", 75, 150), new ObjectClass("Rune Staff of Curse", "May burn your ennemies... Or yourself. Who knows?", 125, 250), new ObjectClass("Combat Edge", "Well, that's an edge", 60, 120), new ObjectClass("Holy Elixir", "Recover your HP", 80, 160)
     };
-
-    /**
-     * Retourne un HashMap contenant les capacités disponibles pour chaque classe d'avatar et chaque niveau.
-     *
-     * @return Un HashMap où la clé est une instance de AvatarClassAvailable représentant la classe d'avatar,
-     * et la valeur est un autre HashMap où la clé est le niveau (Integer) et la valeur est un HashMap des capacités
-     * (String) et de leurs niveaux (Integer).
-     */
-    public static HashMap<AvatarClassAvailable, HashMap<Integer, HashMap<String, Integer>>> abilitiesPerTypeAndLevel() {
-        HashMap<AvatarClassAvailable, HashMap<Integer, HashMap<String, Integer>>> abilitiesPerTypeAndLevel = new HashMap<>();
-
-        abilitiesPerTypeAndLevel.put(AvatarClassAvailable.ADVENTURER, adventurerLevels());
-        abilitiesPerTypeAndLevel.put(AvatarClassAvailable.ARCHER, archerLevels());
-        abilitiesPerTypeAndLevel.put(AvatarClassAvailable.DWARF, dwarfLevels());
-        abilitiesPerTypeAndLevel.put(AvatarClassAvailable.GOBLIN, goblinLevels());
-
-        return abilitiesPerTypeAndLevel;
-    }
-    private static HashMap<String, Integer> adventurerLevel1() {
-        return new Stats(1, 3, 2, 1, 0, 0).getStatsAsHashMap();
-    }
-    private static HashMap<String, Integer> adventurerLevel2() {
-      return new Stats(1, 3, 3, 2, 0, 0).getStatsAsHashMap();
-    }
-    private static HashMap<String, Integer> adventurerLevel3() {
-      return new Stats(1, 5, 3, 2, 1, 0).getStatsAsHashMap();
-    }
-    private static HashMap<String, Integer> adventurerLevel4() {
-      return new Stats(3, 5, 3, 2, 1, 0).getStatsAsHashMap();
-    }
-    private static HashMap<String, Integer> adventurerLevel5() {
-      return new Stats(4, 5, 3, 2, 1, 1).getStatsAsHashMap();
-    }
-
-    private static HashMap<String, Integer> archerLevel1() {
-        return new Stats(0, 3, 1, 1, 0, 3).getStatsAsHashMap();
-    }
-    private static HashMap<String, Integer> archerLevel2() {
-        return new Stats(1, 3, 2, 1, 0, 3).getStatsAsHashMap();
-    }
-    private static HashMap<String, Integer> archerLevel3() {
-        return new Stats(1, 3, 2, 1, 0, 3).getStatsAsHashMap(); // ne sert à rien, mais c'est pour montrer que l'archer est plus fort que les autres classes
-    }
-    private static HashMap<String, Integer> archerLevel4() {
-        return new Stats(2, 3, 2, 1, 0, 3).getStatsAsHashMap();
-    }
-    private static HashMap<String, Integer> archerLevel5() {
-        return new Stats(2, 4, 2, 1, 0, 3).getStatsAsHashMap();
-    }
-
-    private static HashMap<String, Integer> dwarfLevel1() {
-        return new Stats(0,3,0,1,4,0).getStatsAsHashMap();
-    }
-    private static HashMap<String, Integer> dwarfLevel2() {
-        return new Stats(1, 3, 0, 1, 5, 0).getStatsAsHashMap();
-    }
-    private static HashMap<String, Integer> dwarfLevel3() {
-        return new Stats(1, 4, 0, 1, 5, 0).getStatsAsHashMap();
-    }
-    private static HashMap<String, Integer> dwarfLevel4() {
-        return new Stats(2, 4, 0, 1, 5, 0).getStatsAsHashMap();
-    }
-    private static HashMap<String, Integer> dwarfLevel5() {
-        return new Stats(2, 4, 1, 1, 5, 0).getStatsAsHashMap();
-    }
-
-    private static HashMap<String,Integer> goblinLevel1() {
-        return new Stats(0, 2, 0, 2, 1, 0).getStatsAsHashMap();
-    }
-    private static HashMap<String,Integer> goblinLevel2() {
-        return new Stats(0, 3, 0, 2, 4, 0).getStatsAsHashMap();
-    }
-    private static HashMap<String,Integer> goblinLevel3() {
-        return new Stats(0, 3, 0, 2, 4, 1).getStatsAsHashMap();
-    }
-    private static HashMap<String,Integer> goblinLevel4() {
-        return new Stats(1, 3, 0, 2, 4, 1).getStatsAsHashMap();
-    }
-    private static HashMap<String,Integer> goblinLevel5() {
-        return new Stats(2, 4, 0, 2, 4, 1).getStatsAsHashMap();
-    }
-
-    private static HashMap<Integer, HashMap<String, Integer>> levels(List<HashMap<String,Integer>> abilities) {
-        HashMap<Integer, HashMap<String, Integer>> Levels = new HashMap<>();
-        for (int i = 1; i <= abilities.size(); i++) {
-            Levels.put(i, abilities.get(i - 1));
-        }
-        return Levels;
-
-    }
-    private static HashMap<Integer, HashMap<String, Integer>> adventurerLevels() {
-        return levels(List.of(adventurerLevel1(), adventurerLevel2(), adventurerLevel3(), adventurerLevel4(), adventurerLevel5()));
-    }
-    private static HashMap<Integer, HashMap<String, Integer>> archerLevels() {
-        return levels(List.of(archerLevel1(), archerLevel2(), archerLevel3(), archerLevel4(), archerLevel5()));
-    }
-    private static HashMap<Integer, HashMap<String, Integer>> dwarfLevels() {
-        return levels(List.of(dwarfLevel1(), dwarfLevel2(), dwarfLevel3(), dwarfLevel4(), dwarfLevel5()));
-    }
-    private static HashMap<Integer, HashMap<String, Integer>> goblinLevels() {
-        return levels(List.of(goblinLevel1(), goblinLevel2(), goblinLevel3(), goblinLevel4(), goblinLevel5()));
-    }
 
     /**
      * Ajoute de l'expérience (XP) à un joueur et met à jour son niveau et ses capacités si nécessaire.
@@ -130,11 +24,8 @@ public class UpdatePlayer {
             currentLevel++;
             Random random = new Random();
             player.inventory.add(objectList[random.nextInt(objectList.length)]);
-            HashMap<String, Integer> abilities = abilitiesPerTypeAndLevel().get(player.getAvatarClass()).get(currentLevel);
-            abilities.forEach((ability, level) -> {
-                player.abilities.put(ability, abilities.get(ability));
-            });
-            ;
+            Stats abilities = AvatarStats.forLevel(player.getAvatarClass(), currentLevel);
+            player.abilities = new Stats(abilities);
         }
         return leveledUp;
     }
