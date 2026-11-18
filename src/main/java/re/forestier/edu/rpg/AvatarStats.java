@@ -21,11 +21,11 @@ public final class AvatarStats {
   }
 
   private static Map<Integer,Stats> levelsStats(List<Stats> abilities) {
-      Map<Integer, Stats> Levels = new HashMap<>();
+      Map<Integer, Stats> levels = new HashMap<>();
       for (int i = 1; i <= abilities.size(); i++) {
-          Levels.put(i, abilities.get(i - 1));
+          levels.put(i, abilities.get(i - 1));
       }
-      return Levels;
+      return levels;
   }
   private static Map<Integer, Stats> adventurerLevels() {
       return levelsStats(List.of(new Stats(1, 3, 2, 1, 0, 0),

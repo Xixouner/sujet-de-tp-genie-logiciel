@@ -33,13 +33,13 @@ public class player {
     public player(String playerName, String avatar_name, String avatarClass, int money, ArrayList<ObjectClass> inventory) {
       AvatarClassAvailable avatar;
       if (avatarClass == null) {
-        return;
+        throw new IllegalArgumentException("Avatar class cannot be null");
       }
       try{
         avatar = AvatarClassAvailable.valueOf(avatarClass);
       }
       catch(IllegalArgumentException e) {
-        return;
+        throw new IllegalArgumentException("Invalid avatar class: " + avatarClass);
       }
         this.playerName = playerName;
         this.Avatar_name = avatar_name;

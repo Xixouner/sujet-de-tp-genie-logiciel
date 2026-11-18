@@ -2,12 +2,12 @@ package re.forestier.edu.rpg;
 import java.util.HashMap;
 
 public class Stats {
-  int DEF;
-  int ATK;
-  int CHA;
-  int INT;
-  int ALC;
-  int VIS;
+  private int DEF;
+  private int ATK;
+  private int CHA;
+  private int INT;
+  private int ALC;
+  private int VIS;
 
   public Stats(int DEF, int ATK, int CHA, int INT, int ALC, int VIS) {
     this.DEF = DEF;
