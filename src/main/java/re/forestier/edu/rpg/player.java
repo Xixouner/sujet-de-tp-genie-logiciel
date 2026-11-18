@@ -51,7 +51,7 @@ public class player {
           this.money = money;
         }
         this.inventory = inventory;
-        this.abilities = AvatarStats.forLevel(avatar, 1);
+        this.abilities = new Stats(AvatarStats.forLevel(avatar, 1));
     }
 
     public AvatarClassAvailable getAvatarClass () {

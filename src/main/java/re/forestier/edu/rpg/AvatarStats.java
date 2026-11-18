@@ -6,10 +6,12 @@ import java.util.List;
 
 public final class AvatarStats {
 
+  private static final Map<AvatarClassAvailable, Map<Integer, Stats>> ALL_STATS =createAllStats();
+
   public static Stats forLevel(AvatarClassAvailable avatarClass, int level) {
-    return all().get(avatarClass).get(level);
+    return new Stats(ALL_STATS.get(avatarClass).get(level));
   }
-  private static Map<AvatarClassAvailable, Map<Integer, Stats>> all() {
+  private static Map<AvatarClassAvailable, Map<Integer, Stats>> createAllStats() {
     Map<AvatarClassAvailable,Map<Integer, Stats>> map = new HashMap<>();
     map.put(AvatarClassAvailable.ARCHER, archerLevels());
     map.put(AvatarClassAvailable.ADVENTURER, adventurerLevels());
