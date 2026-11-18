@@ -10,6 +10,8 @@ import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.fail;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 
 
 
@@ -119,10 +121,9 @@ public class UnitTests {
     @Test
     @DisplayName ("prendre une classe qui n'existe pas")
     void testInvalidClass() {
-        player p = new player("Florian", "Grognak le barbare", "INVALID_CLASS", 100, new ArrayList<>());
-        assertThat(p, is(notNullValue()));
-        assertThat(p.getAvatarClass(), is(nullValue()));
-        assertThat(p.playerName, is(nullValue()));
+        assertThrows(IllegalArgumentException.class, () -> {
+            new player("Florian", "Grognak le barbare", "INVALID_CLASS", 100, new ArrayList<>());
+        });
     }
     @Test
     @DisplayName ("test de la fonction majFinDeTour")
@@ -632,8 +633,9 @@ public class UnitTests {
     @Test
     @DisplayName ("Test d'un avatarclass null")
     void testNullAvatarClass() {
-        player p = new player("Florian", "Grognak le barbare", null, 100, new ArrayList<>());
-        assertThat(p.getAvatarClass(), is(nullValue()));
+        assertThrows(IllegalArgumentException.class, () -> {
+            new player("Florian", "Grognak le barbare", null, 100, new ArrayList<>());
+        });
     }
     @Test
     @DisplayName ("Test de vente d'un objet valide par String")
